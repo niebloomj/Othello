@@ -1,0 +1,25 @@
+/* Top level call */
+AlphaBeta(state, 0, -inf, +inf, player)
+
+function AlphaBeta(state, depth, alpha, beta, player)
+    if CutoffTest(state, depth) then return (Eval(State), null)
+    best = null /* handles early pruning or no possible move */
+    if player == +1 then /* MAX player */
+        for each action in Actions(state, player)
+            (child, unused) = Result(state, action)
+            value = AlphaBeta(child, depth+1, alpha, beta, -player)
+            if value > alpha then
+                alpha = value
+                best = action
+            if beta <= alpha then break /* beta cut-off */
+        return (alpha, best)
+    else /* MIN player */
+        for each action in Actions(state, player)
+            (child, unused) = Result(state, action)
+            value = AlphaBeta(child, depth+1, alpha, beta, -player)
+            if value < beta then
+                beta = value
+                best = action
+            if beta <= alpha then break /* alpha cut-off */
+        return (beta, best)
+ end 

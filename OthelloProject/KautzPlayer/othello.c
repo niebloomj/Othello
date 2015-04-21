@@ -83,7 +83,8 @@ int Legal(board state, int player, int X, int Y)
 
 void DoFlip(board state, int player, int X, int Y, int dirX, int dirY)
 {
-    while (X+dirX < 8 && X+dirX >= 0 && Y+dirY < 8 && Y+dirY >= 0 && state[X+dirX][Y+dirY]==-player) {
+    while (X+dirX < 8 && X+dirX >= 0 && Y+dirY < 8 && Y+dirY >= 0 && state[X+dirX][Y+dirY]==-player){
+        
         X = X+dirX; Y = Y+dirY;
         state[X][Y] = player;
     }
@@ -91,21 +92,26 @@ void DoFlip(board state, int player, int X, int Y, int dirX, int dirY)
 
 void Update(board state, int player, int X, int Y)
 {
+    
     int i,j;
 
-    if (X<0) return; /* pass move */
+    if (X<0) return;/* pass move */
+    
     if (state[X][Y] != 0) {
+        
 	printboard(state, player, turn, X, Y);
 	error("Illegal move");
+        
     }
+    
     state[X][Y] = player;
+    
     for (i=-1; i<=1; i++)
 	for (j=-1; j<=1; j++)
+        
 	    if ((i!=0 || j!=0) && CanFlip(state, player, X, Y, i, j))
 		DoFlip(state, player, X, Y, i, j);
 }
-
-    
 
 void Result(board oldstate, board newstate, int player, int X, int Y)
 {
