@@ -83,8 +83,7 @@ int Legal(board state, int player, int X, int Y)
 
 void DoFlip(board state, int player, int X, int Y, int dirX, int dirY)
 {
-    while (X+dirX < 8 && X+dirX >= 0 && Y+dirY < 8 && Y+dirY >= 0 && state[X+dirX][Y+dirY]==-player){
-        
+    while (X+dirX < 8 && X+dirX >= 0 && Y+dirY < 8 && Y+dirY >= 0 && state[X+dirX][Y+dirY]==-player) {
         X = X+dirX; Y = Y+dirY;
         state[X][Y] = player;
     }
@@ -92,26 +91,21 @@ void DoFlip(board state, int player, int X, int Y, int dirX, int dirY)
 
 void Update(board state, int player, int X, int Y)
 {
-    
     int i,j;
 
-    if (X<0) return;/* pass move */
-    
+    if (X<0) return; /* pass move */
     if (state[X][Y] != 0) {
-        
 	printboard(state, player, turn, X, Y);
 	error("Illegal move");
-        
     }
-    
     state[X][Y] = player;
-    
     for (i=-1; i<=1; i++)
 	for (j=-1; j<=1; j++)
-        
 	    if ((i!=0 || j!=0) && CanFlip(state, player, X, Y, i, j))
 		DoFlip(state, player, X, Y, i, j);
 }
+
+    
 
 void Result(board oldstate, board newstate, int player, int X, int Y)
 {
@@ -120,6 +114,7 @@ void Result(board oldstate, board newstate, int player, int X, int Y)
 	for (j=0; j<8; j++)
 	    newstate[i][j] = oldstate[i][j];
     Update(newstate, player, X, Y);
+    
 }
 
 int GameOver(board state)
@@ -134,10 +129,9 @@ int GameOver(board state)
     return TRUE;
 }
 
-
-
 void MakeMove(void)
 {
+    
     int X,Y;
 	int a =0;
 	int b = 0;
@@ -165,16 +159,20 @@ void MakeMove(void)
 	printf("pass\n");
 	fflush(stdout);
     }
+    
     if (debug) printboard(gamestate, me, ++turn, X, Y);
+    
+    
 }
-
 
 int main(int argc, char** argv)
 {
+    
     char inbuf[256];
     char playerstring[1];
     int X,Y;
 
+    
     if (argc >= 2 && strncmp(argv[1],"-d",2)==0) debug = TRUE;
     turn = 0;
     fgets(inbuf, 256, stdin);
@@ -183,15 +181,21 @@ int main(int argc, char** argv)
     if (playerstring[0] == 'B') me = 1; else me = -1;
     NewGame();
     if (me == 1) MakeMove();
+    
     while (fgets(inbuf, 256, stdin)!=NULL){
-	if (strncmp(inbuf,"pass",4)!=0) {
+	
+        if (strncmp(inbuf,"pass",4)!=0) {
 	    if (sscanf(inbuf, "%d %d", &X, &Y) != 2) return 0;
 	    Update(gamestate, -me, X, Y);
 	    if (debug) printboard(gamestate, -me, ++turn, X, Y);
 	}
-	MakeMove();
+	
+        MakeMove();
+        
     }
+    
     return 0;
+    
 }
 
     
