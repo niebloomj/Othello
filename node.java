@@ -40,6 +40,12 @@ public class node{
         
         this.layer=layer;
     }
+    
+    public ArrayList<int[][]> getLegalMove(){
+        
+        //return an array list with legal moves from the current state
+        
+    }
 	
 
 }
