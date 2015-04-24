@@ -1,18 +1,20 @@
+import java.util.ArrayList;
 
 public class node{
 
 	
-	short[][] state;
-	int socre;
+	public int[][] state;
+	public int socre;
+    public int layer;
 
-	node parent;
-	List<node> childList;
+	public node parent;
+	public ArrayList<node> childList;
 
-	byte player; 
-
-	//for connecting its peers
-	node next;
-	node prev;
+	public byte player;
+  
+    //for connecting its peers
+	public node next;
+	public node prev;
 
 	public node(byte player,short[][] state){
 
@@ -23,7 +25,7 @@ public class node{
 	 * take current player and state
 	 * to create a new child node
 	*/
-	public node insertChild(byte player,int[][] state){
+	public node addChild(byte player,int[][] state){
 		
 		node newChild=new node(player,state);
 		newChild.parent=this;
@@ -34,6 +36,10 @@ public class node{
 		
 		this.parent=parent;
 	}
+    public void setLayer(int layer){
+        
+        this.layer=layer;
+    }
 	
 
 }
