@@ -25,11 +25,11 @@ public class node{
 	 * take current player and state
 	 * to create a new child node
 	*/
-	public node addChild(byte player,int[][] state){
+	public node addChild(node child){
 		
-		node newChild=new node(player,state);
-		newChild.parent=this;
-		this.childList.add(newChild);
+		child.parent=this;
+        child.layer=parent.layer+1;
+		this.childList.add(child);
 	}
 
 	public void setParent(node parent){

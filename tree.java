@@ -152,16 +152,12 @@
 
 		ArrayList<int[][]> legalState=currentNode.getLegalMove();
 		ArrayList<node> children=new ArrayList<node>();
-		byte player=(currentNode.player==1)? 0:1;
-
+        byte player=(currentNode.player==1)? 0:1;
 
 		for(int[][] ls: legalState){
 
 			node child=new node(player,ls);
-			child.setLayer(currentNode.layer+1);//set the layer of the child
-            child.setParent(currentNode);
-			
-            currentNode.addChild(child);
+			currentNode.addChild(child);
 			children.add(child);
 			
 			}
