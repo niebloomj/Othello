@@ -16,7 +16,7 @@ public class node{
 	public node next;
 	public node prev;
 
-	public node(byte player,short[][] state){
+	public node(byte player,int[][] state){
 
 		this.player=player;	
 		this.state=state;
