@@ -4,7 +4,11 @@ public class node{
 
 	
 	public int[][] state;
-	public int socre;
+    
+    public int alpha=Integer.MIN_VALUE; //default alpha
+    public int beta=Integer.MAX_VALUE; //default beta
+    
+    public int score;
     public int layer;
 
 	public node parent;
@@ -25,11 +29,21 @@ public class node{
 	 * take current player and state
 	 * to create a new child node
 	*/
-	public node addChild(node child){
+	public void addChild(node child){
 		
 		child.parent=this;
         child.layer=parent.layer+1;
-		this.childList.add(child);
+        
+        if(this.player==1){
+            
+            child.player=0;
+       
+        }else{
+            
+            child.player=1;
+        }
+		
+        this.childList.add(child);
 	}
 
 	public void setParent(node parent){
@@ -44,6 +58,7 @@ public class node{
     public ArrayList<int[][]> getLegalMove(){
         
         //return an array list with legal moves from the current state
+        
         
     }
 	
