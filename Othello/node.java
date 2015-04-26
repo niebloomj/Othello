@@ -14,7 +14,6 @@ public class node {
 
 	public node parent;
 	public ArrayList<node> childList;
-
     
 	public node(byte player,Board state) {
         this.player=player;
@@ -22,7 +21,7 @@ public class node {
         getScore();
         
     }
-    public node(Board state){
+    public node(Board state,int[] move){
         
         this.state=state;
         getScore();
@@ -48,12 +47,14 @@ public class node {
 		this.layer = layer;
 	}
 
-    
-    public ArrayList<Board> getLegalBoard(){
+    public ArrayList<tuple> getLegalBoard(){
         
-        ArrayList<Board> Boards=new ArrayList<Board>();
+        //the tuple contains the new board
+        //and the move, which directs to the new board
+        ArrayList<tuple> boardTuple=new ArrayList<tuple>();
     
         for(int[] move:this.state.getLegalMoves()){
+            
             
             byte[][] temp=new byte[8][8];
             
@@ -69,12 +70,14 @@ public class node {
             
             Board b=new Board(temp);
             
+            tuple t=new tuple(b,move);
+            
             //do the all flip stuffs, and return the most up-to-date board
             
-            Boards.add(b);
+            boardTuple.add(t);
         }
 
-        
+        return boardTuple;
         
     }
     

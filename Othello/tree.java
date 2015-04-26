@@ -4,7 +4,7 @@
 public Board makeDecision(Board state,int depthLimit,int timeLimit1,int timeLimit2){
 
 
-    node root = new node((byte)1,state);
+     node root = new node((byte)1,state);
 
      build(root);
      AlphaBeta(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
@@ -32,11 +32,12 @@ public Board makeDecision(Board state,int depthLimit,int timeLimit1,int timeLimi
             if((root.hasLegalMove())&&!(root.layer>depthLimit)){
                 
                 
-                ArrayList<Board> childrenBoard=root.getLegalBoard();
+                ArrayList<tuple> childrenBoard=root.getLegalBoard();
                 
-                for(Board state:childrenBoard){
+                for(tuple t:childrenBoard){
                     
-                    node child=new node(state);
+                    node child=new node(t.board); //add new board
+                    child.move=t.move; //add move (this move directs to this new board)
                     root.addChild(child);
                     build(child);
                 }
