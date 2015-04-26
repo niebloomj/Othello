@@ -33,7 +33,7 @@ public class board {
 		}
 	}
 
-	public ArrayList<int[]> legalMoves() {
+	public ArrayList<int[]> getLegalMoves() {
 		ArrayList<int[]> moves = new ArrayList<>();
 		for (int i = 0; i < 8; i ++)
 			for (int j = 0; j < 8; j++)
