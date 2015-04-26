@@ -1,16 +1,32 @@
 
-	public class Tree{
+//methods for using in main.class
 
-		public node root;
-		public int depthLimit;
+public int[][] makeDecision(int[][] state,int depthLimit,int timeLimit1,int timeLimit2){
 
-		public Tree(node root){
-			
-			this.root=root;
-            root.setLayer=0;
-		}
-        
-        public void build(node root){
+
+		node root = new node((byte)1,state);
+
+     build(root);
+     AlphaBeta(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+
+
+    node back=null;
+
+    for(node child : root.childList ){
+
+    if(child.alpha==root.alpha){
+
+        back=child;
+        break;
+    }
+
+    }
+
+     return back.state;
+
+    }
+
+   public void build(node root){
             
             
             if(!(root.hasNoLegalMove())&&!(root.layer>depthLimit)){
@@ -30,17 +46,54 @@
             return;
             
         }
+    
 
-        
-        
-		
+    public int AlphaBeta(node n, int alpha, int beta){
+
+    if(n.children == null)
+    return n.score;
+
+    if(state.player == 1){
+    int childnum = n.childList.size();
+    for(int i = 0; i < childnum ; i++){ // for each possible move
+
+    int value = AlphaBeta(n.childList.get(i), alpha, beta);
+
+    if(value > alpha){
+    alpha = value;}
+    if(beta <= alpha) // pruning
+    return beta;
+    }
+    return alpha;
+
+    }
+    else{// for player == -1
+    int childnum = n.childList.size();
+    for(int i = 0; i < childnum ; i++){
+    int value = AlphaBeta(n.childList.get(i),alpha,beta);
+    if(value < beta)
+    beta = value;
+
+    if(beta <= alpha)// pruning
+    return alpha;
+
+    }
+    return beta;
+
+
+    }
+
+
+    }
+
+
 //		public void buildWholeTree(){
 //
 //			buildTreeWithDepth(Integer.MAX_VALUE);
 //		}
-//        
+//
 //        public node continueBuildTree(node ptr，int depth){
-//            
+//
 //            //if the depth limit has been reached
 //            //the ptr will either landed on the first node of the even layer
 //            //or the last node of the odd layer
@@ -198,6 +251,5 @@
 
 
 
-	}
 
 		

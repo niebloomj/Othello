@@ -32,7 +32,7 @@ void printboard(board state, int player, int turn, int X, int Y)
 	    fprintf(stderr, "%4d", state[i][j]);
 	    if(state[i][j]) num --;
  	}
- 	printf("\n");
+    printf("\n");
     }
     printf("number of blanks = %d\n", num);
 }
@@ -133,23 +133,23 @@ void MakeMove(void)
 {
     
     int X,Y;
-	int a =0;
-	int b = 0;
-
-	X = -1;
-	Y = -1;
-	for(a = 0; a<8; a++)
-	{
-		for(b = 0; b<8; b++)
-		{
-			if(Legal(gamestate,me, a,b))
-			{
-				X = a;
-				Y = b;
-				break;
-			}
-		}
-	}
+//	int a =0;
+//	int b = 0;
+//
+//	X = -1;
+//	Y = -1;
+//	for(a = 0; a<8; a++)
+//	{
+//		for(b = 0; b<8; b++)
+//		{
+//			if(Legal(gamestate,me, a,b))
+//			{
+//				X = a;
+//				Y = b;
+//				break;
+//			}
+//		}
+//	}
 
     if (X>=0) {
 	Update(gamestate, me, X, Y);
@@ -159,7 +159,7 @@ void MakeMove(void)
 	printf("pass\n");
 	fflush(stdout);
     }
-    
+      
     if (debug) printboard(gamestate, me, ++turn, X, Y);
     
     
@@ -174,12 +174,20 @@ int main(int argc, char** argv)
 
     
     if (argc >= 2 && strncmp(argv[1],"-d",2)==0) debug = TRUE;
+    
     turn = 0;
+    
     fgets(inbuf, 256, stdin);
+    
     if (sscanf(inbuf, "game %1s %d %d %d", playerstring, &depthlimit, &timelimit1, &timelimit2) != 4) error("Bad initial input");
+    
     depthlimit = 4;
-    if (playerstring[0] == 'B') me = 1; else me = -1;
+    
+    if (playerstring[0] == 'B') me = 1;
+    else me = -1;
+    
     NewGame();
+    
     if (me == 1) MakeMove();
     
     while (fgets(inbuf, 256, stdin)!=NULL){
@@ -191,6 +199,7 @@ int main(int argc, char** argv)
 	}
 	
         MakeMove();
+        
         
     }
     
