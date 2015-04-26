@@ -1,10 +1,10 @@
 
 //methods for using in main.class
 
-public int[][] makeDecision(int[][] state,int depthLimit,int timeLimit1,int timeLimit2){
+public Board makeDecision(Board state,int depthLimit,int timeLimit1,int timeLimit2){
 
 
-		node root = new node((byte)1,state);
+    node root = new node((byte)1,state);
 
      build(root);
      AlphaBeta(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
@@ -29,14 +29,14 @@ public int[][] makeDecision(int[][] state,int depthLimit,int timeLimit1,int time
    public void build(node root){
             
             
-            if(!(root.hasNoLegalMove())&&!(root.layer>depthLimit)){
+            if((root.hasLegalMove())&&!(root.layer>depthLimit)){
                 
                 
-                ArrayList<ndoe>children=root.getLegalMove();
+                ArrayList<Board> childrenBoard=root.getLegalBoard();
                 
-                for(int[][] st:children){
+                for(Board state:childrenBoard){
                     
-                    node child=new node();
+                    node child=new node(state);
                     root.addChild(child);
                     build(child);
                 }

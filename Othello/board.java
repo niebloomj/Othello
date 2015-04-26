@@ -2,10 +2,17 @@ import java.util.ArrayList;
 
 
 public class Board {
-	byte[][] board;
-	byte turn = 1;
-
+	
+    byte[][] board;
+	
+    byte turn = 1;
+    
+    public Board(byte[][] newboard){
+        
+        this.board=newboard;
+    }
 	public Board() {
+        
 		board = new byte[8][8];
 		for (int i = 0; i < 8; i ++)
 			for (int j = 0; j < 8; j++)
