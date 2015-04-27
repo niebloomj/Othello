@@ -103,13 +103,72 @@ public class node {
 	 * in the current board.
 	 */
 	public int getScore(){
-		int score = 0;
-		for (int i = 0; i < this.state.board.length; i++)
-			for (int j = 0; j < this.state.board[i].length; j++)
-				if (this.state.board[i][j] == (int)1)
-					score++;
-		return score;
-	}
+        
+        
+        double hscore = 0;
+        int minscore = 0;
+        int maxscore = 0;
+        
+        int badscore = 0;
+        int movability = 0;
+        
+        for(int i = 0; i< this.state.board.length; i++)
+            
+            for( int j = 0;j < this.state.board[i].length; j++){
+                
+                if(this.state.board[i][j] == 1){
+                    
+                    
+                    if(this.layer < 40){
+                        if((i == 1 && j == 0)||
+                           (i == 0 && j == 1)||
+                           (i == 1 && j == 7)||
+                           (i == 0 && j == 6)||
+                           (i == 6 && j == 0)||
+                           (i == 7 && j == 1)||
+                           (i == 6 && j == 7)||
+                           (i == 7 && j == 6))
+                            badscore = badscore -2;
+                        
+                        if((i == 1 && j == 1)||
+                           (i == 6 && j == 1)||
+                           (i == 1 && j == 6)||
+                           (i == 6 && j == 6))
+                            badscore -= 5;
+                    }
+                    
+                    maxscore++;
+                }
+                if(this.state.board[i][j] == -1)
+                    minscore++;
+                
+                
+            }
+        
+		      
+		      if(this.layer < 40)
+                  movability = this.state.getLegalMoves().size();
+        
+        
+        
+        
+        hscore = 100 * ((double)maxscore - (double)minscore)/((double)maxscore + (double)minscore) 
+        + badscore + movability;
+        
+        return hscore;
+        
+    
+//		int score = 0;
+//		for (int i = 0; i < this.state.board.length; i++)
+//			for (int j = 0; j < this.state.board[i].length; j++)
+//				if (this.state.board[i][j] == (int)1)
+//					score++;
+//		return score;
+	
+    }
+    
+    
+    
 	/*
 	 * By using the canfilp and dofilp method to
 	 * update the board.
