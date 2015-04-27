@@ -5,7 +5,7 @@ public class tree {
 	int depthLimit;
 
 	public Board makeDecision(Board state, int timeLimit1, int timeLimit2) {
-		node root = new node(new Board());
+		node root = new node(state);
 		build(root);
 		AlphaBeta(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 		node back = null;
