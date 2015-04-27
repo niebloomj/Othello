@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class main {
 
     public static final int DEFAULT_DEPTH = 4; //this is the default depth the tree will construct.
-    public int currentDepth=0;
+    public static int currentDepth=0;
     
     public static void main(String[] args) {
 
