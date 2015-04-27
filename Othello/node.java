@@ -9,7 +9,7 @@ public class node {
 	public int beta = Integer.MAX_VALUE; //default beta
 
 	public int score;
-	public int layer=0;
+	public int layer;
 	// public byte player;
 
 	public node parent;
@@ -18,13 +18,17 @@ public class node {
 	public node(Board state) {
 		// this.player = player;
 		this.state = state;
+        this.layer=0;
 		getScore();
+        
 	}
 
 	public node(Board state, byte x, byte y) {
+        
 		this.state = state;
 		this.state.move(x, y);
-		getScore();
+        this.layer=0;
+        getScore();
 	}
 
 	/*
