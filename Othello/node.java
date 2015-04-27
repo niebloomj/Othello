@@ -152,10 +152,10 @@ public class node {
         
         
         
-        hscore = 100 * ((double)maxscore - (double)minscore)/((double)maxscore + (double)minscore) 
-        + badscore + movability;
+        hscore = 1000 * ((double)maxscore - (double)minscore)/((double)maxscore + (double)minscore)
+        + (double)badscore + (double)movability;
         
-        return hscore;
+        return (int)hscore;
         
     
 //		int score = 0;
