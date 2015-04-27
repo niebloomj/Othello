@@ -86,7 +86,7 @@ public class main {
             for (tuple t : childrenBoard) {
 
                 node child = new node(t.board); //add new board
-                child.state.move(t.x, t.y);
+                //child.state.move(t.x, t.y);
                 child.layer = root.layer + 1;
                 root.addChild(child);
                 build(child, depthLimit);
