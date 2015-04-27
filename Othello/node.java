@@ -47,7 +47,7 @@ public class node {
 		this.layer = layer;
 	}
 
-	public ArrayList<tuple> getLegalBoard() {
+	public ArrayList<tuple> getChildBoards() {
 
 		//the tuple contains the new board
 		//and the move, which directs to the new board
