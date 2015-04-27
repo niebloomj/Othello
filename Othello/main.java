@@ -22,7 +22,7 @@ public class main {
         //and bbuild a new tree; then, do the ab pruning and return the
         //move we want to act to handle the opposite player's action.
 
-        // makeDecision(board, DEFAULT_DEPTH, 0, 0);
+        // getDecision(board, DEFAULT_DEPTH, 0, 0);
 
 
 
@@ -37,9 +37,10 @@ public class main {
             //a new board, and according to the new board we make a root,
             //and bbuild a new tree; then, do the ab pruning and return the
             //move we want to act to handle the opposite player's action.
-
-            int[] decision = makeDecision(board, DEFAULT_DEPTH, 0, 0);
+            System.out.println("AI Goes")
+            int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
             board.move(decision[0], decision[1]);
+            board.print();
         }
 
 
@@ -48,7 +49,7 @@ public class main {
     /*
      * this method returns an int[], which is the move that the current node contains
      */
-    public static int[] makeDecision(Board state, int depthLimit, int timeLimit1, int timeLimit2) {
+    public static int[] getDecision(Board state, int depthLimit, int timeLimit1, int timeLimit2) {
 
         node root = new node(state);
         root.layer = currentDepth;
