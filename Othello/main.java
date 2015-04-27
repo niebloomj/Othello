@@ -37,7 +37,7 @@ public class main {
             //a new board, and according to the new board we make a root,
             //and bbuild a new tree; then, do the ab pruning and return the
             //move we want to act to handle the opposite player's action.
-            System.out.println("AI Goes")
+            System.out.println("AI Goes");
             int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
             board.move(decision[0], decision[1]);
             board.print();
