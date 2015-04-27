@@ -65,27 +65,23 @@ public class node {
 
 		for (int[] move : this.state.getLegalMoves()) {
 
-			// int[][] temp = new int[8][8];
-
-			// for (int i = 0; i < this.state.board.length; i++) {
-
-			// 	for (int j = 0; j < this.state.board[i].length; j++) {
-
-			// 		temp[i][j] = this.state.board[i][j];
-			// 	}
-			// }
-			Board tempBoard = new Board(state);
+            Board tempBoard = new Board(state.board,-(this.state.turn));
+            
 			tempBoard.move(move[0], move[1]);
+            
 			tuple t = new tuple(tempBoard, move[0], move[1]);
 
 			//do the all flip stuffs, and return the most up-to-date board
 
 			boardTuple.add(t);
-		}
-		return boardTuple;
+		
+        }
+		
+        return boardTuple;
 	}
 
 	public boolean hasLegalMove() {
+        
 		return (this.state.getLegalMoves().size() != 0) ? true : false;
 	}
 
@@ -93,7 +89,7 @@ public class node {
 	 * the score is equivalent to the current number of our player
 	 * in the current board.
 	 */
-	public int getScore() {
+	public int getScore(){
 		int score = 0;
 		for (int i = 0; i < this.state.board.length; i++)
 			for (int j = 0; j < this.state.board[i].length; j++)

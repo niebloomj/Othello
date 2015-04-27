@@ -14,9 +14,6 @@ public class main {
 
         Board board = new Board(); //the initial board
 
-
-
-
         //everytime the opposite player will give me
         //a new board, and according to the new board we make a root,
         //and bbuild a new tree; then, do the ab pruning and return the
@@ -24,23 +21,50 @@ public class main {
 
         // getDecision(board, DEFAULT_DEPTH, 0, 0);
 
-
-
         Scanner scan = new Scanner(System.in);
+        
         while (true) {
+            
+            int count=0;
+            if(count==0){
             board.print();
+                count++;
+            }
+            
+            System.out.println();
+            
             System.out.println("Give me your x then your y");
+            
             int x = scan.nextInt();
             int y = scan.nextInt();
+            
             board.move(x, y);
+            
+            board.print();
+            System.out.println();
+            
+            
+//            for(int[] lm:board.getLegalMoves()){
+//                
+//                System.out.println("("+lm[0]+","+lm[1]+")");
+//                
+//            }
             //everytime the opposite player will give me
             //a new board, and according to the new board we make a root,
             //and bbuild a new tree; then, do the ab pruning and return the
             //move we want to act to handle the opposite player's action.
+           
             System.out.println("AI Goes");
-            int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
+           
+            int[] decision = getDecision(board,DEFAULT_DEPTH, 0, 0);
+            
             board.move(decision[0], decision[1]);
+            
+            
+            
             board.print();
+            System.out.println();
+            
         }
 
 
@@ -51,19 +75,29 @@ public class main {
      */
     public static int[] getDecision(Board state, int depthLimit, int timeLimit1, int timeLimit2) {
 
-        node root = new node(state);
+        Board tempboard=new Board(state.board,state.turn);
+        
+        node root = new node(tempboard);
+        
         root.layer = currentDepth;
 
         build(root, depthLimit);
 
         AlphaBeta(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+       
         node back = null;
+        
         for (node child : root.childList ) {
             if (child.alpha == root.alpha) {
                 back = child;
                 break;
             }
         }
+        
+        //System.out.println("return move: "+back.state.prevMove);
+        
+        
+        System.out.println("getDecision make move: ("+back.state.prevMove[0]+","+back.state.prevMove[1]+")");
         return back.state.prevMove; //return move: [x,y]
 
     }
@@ -77,6 +111,7 @@ public class main {
 
     public static void build(node root, int depthLimit) {
 
+        
         currentDepth = root.layer;
 
         if ((root.hasLegalMove()) && !(root.layer > depthLimit)) {
@@ -87,7 +122,9 @@ public class main {
             for (tuple t : childrenBoard) {
 
                 node child = new node(t.board); //add new board
-                child.state.move(t.x, t.y);
+                
+                //child.state.move(t.x, t.y);
+                
                 child.layer = root.layer + 1;
                 root.addChild(child);
                 build(child, depthLimit);
@@ -121,6 +158,7 @@ public class main {
         } else { // for player == -1
             int childnum = n.childList.size();
             for (int i = 0; i < childnum ; i++) {
+                
                 int value = AlphaBeta(n.childList.get(i), alpha, beta);
                 if (value < beta)
                     beta = value;

@@ -7,9 +7,10 @@ public class Board {
 	int turn = 1;
 	int[] prevMove;
 
-	public Board(Board newboard) {
-		this.board = newboard.board;
-		this.turn = newboard.turn;
+	public Board(int[][] newboard,int turn) {
+		
+        this.board = newboard;
+        this.turn =  turn;
 	}
 
 	public Board() {
@@ -44,7 +45,7 @@ public class Board {
 	}
 
 	/*
-	 * By using the canfilp and dofilp method to
+	 * use the canfilp and dofilp method to
 	 * update the board.
 	 */
 	public void Update(int X, int Y) {
