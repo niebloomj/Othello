@@ -203,7 +203,7 @@ public class tree {
 //
 //		ArrayList<int[][]> legalState=currentNode.getLegalMove();
 //		ArrayList<node> children=new ArrayList<node>();
-//        byte player=(currentNode.player==1)? 0:1;
+//        int player=(currentNode.player==1)? 0:1;
 //
 //		for(int[][] ls: legalState){
 //
