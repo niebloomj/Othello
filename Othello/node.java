@@ -73,9 +73,24 @@ public class node {
 
 			boardTuple.add(t);
 		}
-
 		return boardTuple;
+	}
 
+	public boolean hasLegalMove() {
+		return (this.state.getLegalMoves().size() != 0) ? true : false;
+	}
+
+	/*
+	 * the score is equivalent to the current number of our player
+	 * in the current board.
+	 */
+	public int getScore() {
+		int score = 0;
+		for (int i = 0; i < this.state.board.length; i++)
+			for (int j = 0; j < this.state.board[i].length; j++)
+				if (this.state.board[i][j] == (byte)1)
+					score++;
+		return score;
 	}
 	/*
 	 * By using the canfilp and dofilp method to
@@ -115,30 +130,7 @@ public class node {
 	// 	else return false;
 	// }
 
-	public boolean hasLegalMove() {
 
-		return (this.state.getLegalMoves().size() != 0) ? true : false;
-	}
-
-	/*
-	 * the score is equivalent to the current number of our player
-	 * in the current board.
-	 */
-	public int getScore() {
-
-		int score = 0;
-
-		for (int i = 0; i < this.state.board.length; i++) {
-
-			for (int j = 0; j < this.state.board[i].length; j++) {
-
-				if (this.state.board[i][j] == (byte)1)
-					score++;
-			}
-		}
-
-		return score;
-	}
 
 
 }
