@@ -67,8 +67,7 @@ public class node {
 			Board tempBoard = state;
 			tempBoard.move(move[0], move[1]);
 			// Update(temp, move[0], move[1]);
-			Board b = new Board(tempBoard);
-			tuple t = new tuple(b, move[0], move[1]);
+			tuple t = new tuple(tempBoard, move[0], move[1]);
 
 			//do the all flip stuffs, and return the most up-to-date board
 
