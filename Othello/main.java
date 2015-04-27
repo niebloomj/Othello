@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class main {
 
@@ -11,13 +12,21 @@ public class main {
         //or a new move(x,y) from the oppoiste player?????
 
         Board board = new Board(); //the initial board
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            board.print();
+            System.out.println("Give me your x then your y");
+            byte x = scan.nextByte();
+            byte y = scan.nextByte();
+            board.move(x, y);
+            //everytime the opposite player will give me
+            //a new board, and according to the new board we make a root,
+            //and bbuild a new tree; then, do the ab pruning and return the
+            //move we want to act to handle the opposite player's action.
 
-        //everytime the opposite player will give me
-        //a new board, and according to the new board we make a root,
-        //and bbuild a new tree; then, do the ab pruning and return the
-        //move we want to act to handle the opposite player's action.
-
-        makeDecision(board, DEFAULT_DEPTH, 0, 0);
+            byte[] decision = makeDecision(board, DEFAULT_DEPTH, 0, 0);
+            board.move(decision[0], decision[1]);
+        }
 
     }
 
@@ -74,7 +83,6 @@ public class main {
 
         if (!n.hasLegalMove())
             return n.score;
-
         if (n.state.turn == 1) {
             int childnum = n.childList.size();
             for (int i = 0; i < childnum ; i++) { // for each possible move
@@ -88,7 +96,6 @@ public class main {
                     return beta;
             }
             return alpha;
-
         } else { // for player == -1
             int childnum = n.childList.size();
             for (int i = 0; i < childnum ; i++) {
