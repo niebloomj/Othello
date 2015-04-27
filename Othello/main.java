@@ -13,10 +13,7 @@ public class main {
         //or a new move(x,y) from the oppoiste player?????
 
         Board board = new Board(); //the initial board
-
-
-
-
+        
         //everytime the opposite player will give me
         //a new board, and according to the new board we make a root,
         //and bbuild a new tree; then, do the ab pruning and return the
@@ -27,6 +24,7 @@ public class main {
         
         Scanner scan = new Scanner(System.in);
         while (true) {
+            
             System.out.println("Give me your x then your y");
             int x = scan.nextInt();
             int y = scan.nextInt();
