@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Board {
 
 	int[][] board;
-	int turn = 1;
+	int turn = -1;
 	int[] prevMove;
 
 	public Board(int[][] newboard,int turn) {
@@ -12,6 +12,8 @@ public class Board {
         this.board = newboard;
         this.turn =  turn;
 	}
+    
+    
 
 	public Board() {
 		board = new int[8][8];
