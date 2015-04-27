@@ -80,9 +80,7 @@ public Board makeDecision(Board state,int depthLimit,int timeLimit1,int timeLimi
 
     }
     return beta;
-
-
-    }
+}
 
 
     }

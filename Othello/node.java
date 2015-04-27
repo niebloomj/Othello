@@ -16,6 +16,7 @@ public class node {
 	public ArrayList<node> childList;
     
 	public node(byte player,Board state) {
+        
         this.player=player;
         this.state=state;
         getScore();
@@ -80,7 +81,10 @@ public class node {
         return boardTuple;
         
     }
-    
+    /*
+     * By using the canfilp and dofilp method to
+     * update the board.
+     */
     public void Update(byte[][] state, byte player, int X, int Y)
     {
         int i,j;
@@ -123,6 +127,10 @@ public class node {
         return (this.state.getLegalMoves().size()!=0)? true:false;
     }
     
+    /*
+     * the score is equivalent to the current number of our player
+     * in the current board.
+     */
     public int getScore(){
         
         int score=0;

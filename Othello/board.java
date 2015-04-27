@@ -5,7 +5,7 @@ public class Board {
 	
     byte[][] board;
 	
-    byte turn = 1;
+    //byte turn = 1;
     
     public Board(byte[][] newboard){
         
@@ -31,14 +31,14 @@ public class Board {
 		}
 	}
 
-	public void move(byte x, byte y) {
-		board[x][y] = turn;
-		if (turn == 1) {
-			turn = -1;
-		} else if (turn == -1) {
-			turn = 1;
-		}
-	}
+//	public void move(byte x, byte y) {
+//		board[x][y] = turn;
+//		if (turn == 1) {
+//			turn = -1;
+//		} else if (turn == -1) {
+//			turn = 1;
+//		}
+//	}
 
 	public ArrayList<int[]> getLegalMoves() {
 		ArrayList<int[]> moves = new ArrayList<>();
