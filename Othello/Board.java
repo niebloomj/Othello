@@ -46,8 +46,8 @@ public class Board {
 				if (board[i][j] == turn) {
 					//Up
 					boolean didJump = false;
-					byte tempI = (byte) i;
-					byte tempJ = (byte) j;
+					byte tempI = i;
+					byte tempJ = j;
 					while (tempJ > 1) {
 						tempJ --;
 						if (board[tempI][tempJ] == turn)
