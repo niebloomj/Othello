@@ -6,10 +6,11 @@ public class Board {
 	byte[][] board;
 	byte turn = 1;
 
-	public Board(byte[][] newboard) {
-
-		this.board = newboard;
+	public Board(Board newboard) {
+		this.board = newboard.board;
+		this.turn = newboard.turn;
 	}
+
 	public Board() {
 
 		board = new byte[8][8];
@@ -39,15 +40,15 @@ public class Board {
 		}
 	}
 
-	public ArrayList<int[]> getLegalMoves() {
-		ArrayList<int[]> moves = new ArrayList<>();
-		for (int i = 0; i < 8; i ++)
-			for (int j = 0; j < 8; j++)
+	public ArrayList<byte[]> getLegalMoves() {
+		ArrayList<byte[]> moves = new ArrayList<>();
+		for (byte i = 0; i < 8; i ++)
+			for (byte j = 0; j < 8; j++)
 				if (board[i][j] == turn) {
 					//Up
 					boolean didJump = false;
-					int tempI = i;
-					int tempJ = j;
+					byte tempI = (byte) i;
+					byte tempJ = (byte) j;
 					while (tempJ > 1) {
 						tempJ --;
 						if (board[tempI][tempJ] == turn)
@@ -57,7 +58,7 @@ public class Board {
 							continue;
 						}
 						if (didJump)
-							moves.add(new int[] {tempI, tempJ});
+							moves.add(new byte[] {tempI, tempJ});
 						break;
 					}
 					//Up && Right
@@ -74,7 +75,7 @@ public class Board {
 							continue;
 						}
 						if (didJump)
-							moves.add(new int[] {tempI, tempJ});
+							moves.add(new byte[] {tempI, tempJ});
 						break;
 					}
 					//Right
@@ -90,7 +91,7 @@ public class Board {
 							continue;
 						}
 						if (didJump)
-							moves.add(new int[] {tempI, tempJ});
+							moves.add(new byte[] {tempI, tempJ});
 						break;
 					}
 					//Right && Down
@@ -107,7 +108,7 @@ public class Board {
 							continue;
 						}
 						if (didJump)
-							moves.add(new int[] {tempI, tempJ});
+							moves.add(new byte[] {tempI, tempJ});
 						break;
 					}
 					//Down
@@ -123,7 +124,7 @@ public class Board {
 							continue;
 						}
 						if (didJump)
-							moves.add(new int[] {tempI, tempJ});
+							moves.add(new byte[] {tempI, tempJ});
 						break;
 					}
 					//Down && Left
@@ -140,7 +141,7 @@ public class Board {
 							continue;
 						}
 						if (didJump)
-							moves.add(new int[] {tempI, tempJ});
+							moves.add(new byte[] {tempI, tempJ});
 						break;
 					}
 					//Left
@@ -156,7 +157,7 @@ public class Board {
 							continue;
 						}
 						if (didJump)
-							moves.add(new int[] {tempI, tempJ});
+							moves.add(new byte[] {tempI, tempJ});
 						break;
 					}
 					//Left && Up
@@ -173,7 +174,7 @@ public class Board {
 							continue;
 						}
 						if (didJump)
-							moves.add(new int[] {tempI, tempJ});
+							moves.add(new byte[] {tempI, tempJ});
 						break;
 					}
 				}

@@ -1,13 +1,13 @@
 
-public class tuple{
+public class tuple {
 
 	Board board;
-	int[] move;
+	byte x;
+	byte y;
 
-	public tuple(Board b,int[]move){
-        
-        this.board=b;
-		this.move=move;
+	public tuple(Board b, byte x, byte y) {
+		this.board = b;
+		this.x = x;
+		this.y = y;
 	}
-	
 }
