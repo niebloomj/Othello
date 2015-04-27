@@ -30,12 +30,14 @@ public class main {
             int y = scan.nextInt();
             board.move(x, y);
             board.print();
+            
+            Board temp=new Board(board.board,board.turn);
             //everytime the opposite player will give me
             //a new board, and according to the new board we make a root,
             //and bbuild a new tree; then, do the ab pruning and return the
             //move we want to act to handle the opposite player's action.
             System.out.println("AI Goes");
-            int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
+            int[] decision = getDecision(temp, DEFAULT_DEPTH, 0, 0);
             board.move(decision[0], decision[1]);
             board.print();
         }
@@ -87,6 +89,7 @@ public class main {
                 //child.state.move(t.x, t.y);
                 child.layer = root.layer + 1;
                 root.addChild(child);
+                
                 build(child, depthLimit);
             }
 

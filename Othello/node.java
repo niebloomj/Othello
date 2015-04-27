@@ -15,27 +15,29 @@ public class node {
 	public node parent;
 	public ArrayList<node> childList;
 
-	public node(Board state) {
+	public node(Board s) {
         
         childList=new ArrayList<node>();
-		// this.player = player;
-        //Board board=new Board(state.board,state.turn);
-        this.state=state;
+		
+        //this.player = player;
+       
+        this.state=s;
 		this.layer = 0;
-		getScore();
+		
+        getScore();
 
 	}
 
 
-	public node(Board state, int x, int y) {
-
-
-		this.state = state;
-		this.state.move(x, y);
-		this.layer = 0;
-		getScore();
-        
-	}
+//	public node(Board state, int x, int y) {
+//
+//
+//		this.state = state;
+//		this.state.move(x, y);
+//		this.layer = 0;
+//		getScore();
+//        
+//	}
 
 	/*
 	 * take current player and state
@@ -66,12 +68,22 @@ public class node {
 
 		for (int[] move : this.state.getLegalMoves()) {
 
-            Board tempBoard = new Board(state.board,-(this.state.turn));
+            int[][] tempShit=new int[8][8];
             
-			tempBoard.move(move[0], move[1]);
+            for(int i=0;i<state.board.length;i++){
+                for(int j=0;j<state.board[i].length;j++){
+                    
+                    tempShit[i][j]=state.board[i][j];
+                }
+            }
             
+            Board tempBoard = new Board(tempShit,-(this.state.turn));
+            
+            tempBoard.move(move[0], move[1]);
+            //System.out.println("move!");
 			tuple t = new tuple(tempBoard, move[0], move[1]);
-
+            
+            //state.print();
 			//do the all flip stuffs, and return the most up-to-date board
 
 			boardTuple.add(t);

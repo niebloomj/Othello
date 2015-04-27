@@ -28,8 +28,14 @@ public class Board {
 
 	public void print() {
 		for (int[] sub : board) {
-			for (int subsub : sub)
-				System.out.print(subsub + " ");
+            for (int subsub : sub){
+                if(subsub==1)
+				System.out.print("*" + " ");
+                else if(subsub==-1)
+                System.out.print("/" + " ");
+                else
+                System.out.print(0 + " ");
+            }
 			System.out.println();
 		}
 	}
@@ -87,7 +93,9 @@ public class Board {
 	}
 
 	public ArrayList<int[]> getLegalMoves() {
+        
 		ArrayList<int[]> moves = new ArrayList<>();
+        
 		for (int i = 0; i < 8; i ++)
 			for (int j = 0; j < 8; j++)
 				if (board[i][j] == turn) {
