@@ -2,17 +2,16 @@ import java.util.ArrayList;
 
 
 public class Board {
-	
-    byte[][] board;
-	
-    //byte turn = 1;
-    
-    public Board(byte[][] newboard){
-        
-        this.board=newboard;
-    }
+
+	byte[][] board;
+	byte turn = 1;
+
+	public Board(byte[][] newboard) {
+
+		this.board = newboard;
+	}
 	public Board() {
-        
+
 		board = new byte[8][8];
 		for (int i = 0; i < 8; i ++)
 			for (int j = 0; j < 8; j++)
@@ -31,14 +30,14 @@ public class Board {
 		}
 	}
 
-//	public void move(byte x, byte y) {
-//		board[x][y] = turn;
-//		if (turn == 1) {
-//			turn = -1;
-//		} else if (turn == -1) {
-//			turn = 1;
-//		}
-//	}
+	public void move(byte x, byte y) {
+		board[x][y] = turn;
+		if (turn == 1) {
+			turn = -1;
+		} else if (turn == -1) {
+			turn = 1;
+		}
+	}
 
 	public ArrayList<int[]> getLegalMoves() {
 		ArrayList<int[]> moves = new ArrayList<>();
