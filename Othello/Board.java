@@ -32,14 +32,14 @@ public class Board {
 	}
 
 	public void move(byte x, byte y) {
-		board[x][y] = turn;
+		// board[x][y] = turn;
 		Update(x, y);
 		//player 1
-		// if (turn == 1)
-		// turn = -1;
-		//player -1
-		// else if (turn == -1)
-		// turn = 1;
+		if (turn == 1)
+			turn = -1;
+		// player - 1
+		else if (turn == -1)
+			turn = 1;
 		prevMove = new byte[] {x, y};
 	}
 
