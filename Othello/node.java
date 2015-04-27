@@ -10,7 +10,7 @@ public class node {
 
 	public int score;
 	public int layer;
-	// public byte player;
+	// public int player;
 
 	public node parent;
 	public ArrayList<node> childList;
@@ -20,18 +20,23 @@ public class node {
         childList=new ArrayList<node>();
 		// this.player = player;
 		this.state = state;
-        this.layer=0;
+		this.layer = 0;
 		getScore();
-        
+
 	}
+
 
 	public node(Board state, byte x, byte y) {
         
         childList=new ArrayList<node>();
+
+	public node(Board state, int x, int y) {
+
+
 		this.state = state;
 		this.state.move(x, y);
-        this.layer=0;
-        getScore();
+		this.layer = 0;
+		getScore();
 	}
 
 	/*
@@ -61,9 +66,9 @@ public class node {
 		//and the move, which directs to the new board
 		ArrayList<tuple> boardTuple = new ArrayList<tuple>();
 
-		for (byte[] move : this.state.getLegalMoves()) {
+		for (int[] move : this.state.getLegalMoves()) {
 
-			// byte[][] temp = new byte[8][8];
+			// int[][] temp = new int[8][8];
 
 			// for (int i = 0; i < this.state.board.length; i++) {
 
@@ -95,7 +100,7 @@ public class node {
 		int score = 0;
 		for (int i = 0; i < this.state.board.length; i++)
 			for (int j = 0; j < this.state.board[i].length; j++)
-				if (this.state.board[i][j] == (byte)1)
+				if (this.state.board[i][j] == (int)1)
 					score++;
 		return score;
 	}
@@ -103,7 +108,7 @@ public class node {
 	 * By using the canfilp and dofilp method to
 	 * update the board.
 	 */
-	// public void Update(Board state, byte X, byte Y) {
+	// public void Update(Board state, int X, int Y) {
 	// 	int i, j;
 
 	// 	if (X < 0) return; /* pass move */
@@ -118,14 +123,14 @@ public class node {
 	// 				DoFlip(state, player, X, Y, i, j);
 	// }
 
-	// public void DoFlip(byte[][] state, byte player, int X, int Y, int dirX, int dirY) {
+	// public void DoFlip(int[][] state, int player, int X, int Y, int dirX, int dirY) {
 	// 	while (X + dirX < 8 && X + dirX >= 0 && Y + dirY < 8 && Y + dirY >= 0 && state[X + dirX][Y + dirY] == -player) {
 	// 		X = X + dirX; Y = Y + dirY;
 	// 		state[X][Y] = player;
 	// 	}
 	// }
 
-	// public boolean CanFlip(byte[][] state, byte player, int X, int Y, int dirX, int dirY) {
+	// public boolean CanFlip(int[][] state, int player, int X, int Y, int dirX, int dirY) {
 	// 	int capture = false;
 	// 	while (X + dirX < 8 && X + dirX >= 0 && Y + dirY < 8 && Y + dirY >= 0 && state[X + dirX][Y + dirY] == -player) {
 	// 		X = X + dirX; Y = Y + dirY;

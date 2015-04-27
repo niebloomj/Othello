@@ -4,8 +4,8 @@ import java.util.Scanner;
 public class main {
 
     public static final int DEFAULT_DEPTH = 4; //this is the default depth the tree will construct.
-    public static int currentDepth=0;
-    
+    public static int currentDepth = 0;
+
     public static void main(String[] args) {
 
         //???do we neeed this to start a new game or we just need the
@@ -14,31 +14,31 @@ public class main {
 
         Board board = new Board(); //the initial board
 
-        
-        
-        
+
+
+
         //everytime the opposite player will give me
         //a new board, and according to the new board we make a root,
         //and bbuild a new tree; then, do the ab pruning and return the
         //move we want to act to handle the opposite player's action.
 
         makeDecision(board, DEFAULT_DEPTH, 0, 0);
-        
-        
-    
+
+
+
         Scanner scan = new Scanner(System.in);
         while (true) {
             board.print();
             System.out.println("Give me your x then your y");
-            byte x = scan.nextByte();
-            byte y = scan.nextByte();
+            int x = scan.nextInt();
+            int y = scan.nextInt();
             board.move(x, y);
             //everytime the opposite player will give me
             //a new board, and according to the new board we make a root,
             //and bbuild a new tree; then, do the ab pruning and return the
             //move we want to act to handle the opposite player's action.
 
-            byte[] decision = makeDecision(board, DEFAULT_DEPTH, 0, 0);
+            int[] decision = makeDecision(board, DEFAULT_DEPTH, 0, 0);
             board.move(decision[0], decision[1]);
         }
 
@@ -48,13 +48,13 @@ public class main {
     /*
      * this method returns an int[], which is the move that the current node contains
      */
-    public static byte[] makeDecision(Board state, int depthLimit, int timeLimit1, int timeLimit2) {
-        
+    public static int[] makeDecision(Board state, int depthLimit, int timeLimit1, int timeLimit2) {
+
         node root = new node(state);
-        root.layer=currentDepth;
-        
+        root.layer = currentDepth;
+
         build(root, depthLimit);
-        
+
         AlphaBeta(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
         node back = null;
         for (node child : root.childList ) {
@@ -76,8 +76,8 @@ public class main {
 
     public static void build(node root, int depthLimit) {
 
-        currentDepth=root.layer;
-        
+        currentDepth = root.layer;
+
         if ((root.hasLegalMove()) && !(root.layer > depthLimit)) {
 
 
