@@ -32,11 +32,10 @@ public class Board {
 
 	public void move(byte x, byte y) {
 		board[x][y] = turn;
-		if (turn == 1) {
+		if (turn == 1)
 			turn = -1;
-		} else if (turn == -1) {
+		else if (turn == -1)
 			turn = 1;
-		}
 	}
 
 	public ArrayList<byte[]> getLegalMoves() {
