@@ -53,7 +53,6 @@ public class Board {
 		if (X < 0) return; /* pass move */
 		if (state[X][Y] != 0) {
 			print();
-			// printboard(state, turn, turn, X, Y);
 			System.out.println("Illegal move");
 		}
 		state[X][Y] = turn;
