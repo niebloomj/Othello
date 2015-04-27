@@ -52,7 +52,7 @@ public class Board {
 		int[][] state = this.board;
 		if (X < 0) return; /* pass move */
 		if (state[X][Y] != 0) {
-			print();
+			// print();
 			System.out.println("Illegal move");
 		}
 		state[X][Y] = turn;

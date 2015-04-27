@@ -22,7 +22,7 @@ public class main {
         //and bbuild a new tree; then, do the ab pruning and return the
         //move we want to act to handle the opposite player's action.
 
-        makeDecision(board, DEFAULT_DEPTH, 0, 0);
+        // makeDecision(board, DEFAULT_DEPTH, 0, 0);
 
 
 
@@ -87,7 +87,7 @@ public class main {
 
                 node child = new node(t.board); //add new board
                 child.state.move(t.x, t.y);
-                child.layer = root.layer+ 1;
+                child.layer = root.layer + 1;
                 root.addChild(child);
                 build(child, depthLimit);
             }
