@@ -26,10 +26,6 @@ public class node {
 	}
 
 
-	public node(Board state, byte x, byte y) {
-        
-        childList=new ArrayList<node>();
-
 	public node(Board state, int x, int y) {
 
 
@@ -37,6 +33,7 @@ public class node {
 		this.state.move(x, y);
 		this.layer = 0;
 		getScore();
+        
 	}
 
 	/*
@@ -45,7 +42,7 @@ public class node {
 	*/
 	public void addChild(node child) {
 
-        System.out.println("this child's layer is "+child.layer);
+        //System.out.println("this child's layer is "+child.layer);
 		child.parent =this;
         //System.out.println("this parent layer is:"+this.parent.layer);
 		// child.player = -(this.player);
