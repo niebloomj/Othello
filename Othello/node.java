@@ -9,7 +9,7 @@ public class node {
 	public int beta = Integer.MAX_VALUE; //default beta
 
 	public int score;
-	public int layer;
+	public int layer=0;
 	// public byte player;
 
 	public node parent;
