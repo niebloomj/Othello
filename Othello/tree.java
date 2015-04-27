@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 //methods for using in main.class
 
+<<<<<<< Updated upstream
 public class tree {
 	int depthLimit;
 
@@ -58,6 +59,100 @@ public class tree {
 		}
 	}
 }
+=======
+public Board makeDecision(Board state,int depthLimit,int timeLimit1,int timeLimit2){
+
+<<<<<<< Updated upstream
+
+     node root = new node((byte)1,state);
+
+     build(root);
+     AlphaBeta(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+=======
+    node root = new node((byte)1,state);
+    build(root);
+    AlphaBeta(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+>>>>>>> Stashed changes
+
+
+    node back=null;
+
+    for(node child : root.childList ){
+
+    if(child.alpha==root.alpha){
+
+        back=child;
+        break;
+    }
+
+    }
+
+     return back.state;
+
+    }
+
+
+    public void build(node root){
+            
+            
+            if((root.hasLegalMove())&&!(root.layer>depthLimit)){
+                
+                
+                ArrayList<tuple> childrenBoard=root.getLegalBoard();
+                
+                for(tuple t:childrenBoard){
+                    
+                    node child=new node(t.board); //add new board
+                    child.move=t.move; //add move (this move directs to this new board)
+                    root.addChild(child);
+                    build(child);
+                }
+                
+            }
+            
+            return;
+            
+        }
+    
+
+    public int AlphaBeta(node n, int alpha, int beta){
+
+    if(n.children == null)
+    return n.score;
+
+    if(state.player == 1){
+    int childnum = n.childList.size();
+    for(int i = 0; i < childnum ; i++){ // for each possible move
+
+    int value = AlphaBeta(n.childList.get(i), alpha, beta);
+
+    if(value > alpha){
+    alpha = value;}
+    if(beta <= alpha) // pruning
+    return beta;
+    }
+    return alpha;
+
+    }
+    else{// for player == -1
+    int childnum = n.childList.size();
+    for(int i = 0; i < childnum ; i++){
+    int value = AlphaBeta(n.childList.get(i),alpha,beta);
+    if(value < beta)
+    beta = value;
+
+    if(beta <= alpha)// pruning
+    return alpha;
+
+    }
+    return beta;
+
+
+    }
+
+
+    }
+>>>>>>> Stashed changes
 
 
 //		public void buildWholeTree(){

@@ -19,7 +19,8 @@ public class node {
         
         childList=new ArrayList<node>();
 		// this.player = player;
-		this.state = state;
+        Board board=new Board(state.board,state.turn);
+        this.state=board;
 		this.layer = 0;
 		getScore();
 
