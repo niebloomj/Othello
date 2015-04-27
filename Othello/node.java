@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class node {
 
 	public Board state;
-	public int[] move; //int array with size 2 that decides the next move
+	// public int[] move;
 
 	public int alpha = Integer.MIN_VALUE; //default alpha
 	public int beta = Integer.MAX_VALUE; //default beta

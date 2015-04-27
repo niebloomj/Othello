@@ -5,6 +5,7 @@ public class Board {
 
 	byte[][] board;
 	byte turn = 1;
+	byte[] prevMove;
 
 	public Board(Board newboard) {
 		this.board = newboard.board;
@@ -36,6 +37,7 @@ public class Board {
 			turn = -1;
 		else if (turn == -1)
 			turn = 1;
+		prevMove = new byte[] {x, y};
 	}
 
 	public ArrayList<byte[]> getLegalMoves() {

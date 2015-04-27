@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 
 public class main {
 
@@ -24,24 +24,18 @@ public class main {
     /*
      * this method returns an int[], which is the move that the current node contains
      */
-    public static int[] makeDecision(Board state, int depthLimit, int timeLimit1, int timeLimit2) {
+    public static byte[] makeDecision(Board state, int depthLimit, int timeLimit1, int timeLimit2) {
         node root = new node(state);
         build(root, depthLimit);
         AlphaBeta(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
-
-
         node back = null;
-
         for (node child : root.childList ) {
-
             if (child.alpha == root.alpha) {
-
                 back = child;
                 break;
             }
-
         }
-        return child.move; //return move: [x,y]
+        return back.state.prevMove; //return move: [x,y]
 
     }
 
@@ -58,14 +52,14 @@ public class main {
         if ((root.hasLegalMove()) && !(root.layer > depthLimit)) {
 
 
-            ArrayList<tuple> childrenBoard = root.getLegalBoard();
+            ArrayList<tuple> childrenBoard = root.getChildBoards();
 
             for (tuple t : childrenBoard) {
 
                 node child = new node(t.board); //add new board
-                child.move = t.move; //add move (this move directs to this new board)
+                child.state.move(t.x, t.y);
                 root.addChild(child);
-                build(child);
+                build(child, depthLimit);
             }
 
         }
@@ -78,10 +72,10 @@ public class main {
      */
     public static int AlphaBeta(node n, int alpha, int beta) {
 
-        if (n.children == null)
+        if (!n.hasLegalMove())
             return n.score;
 
-        if (state.player == 1) {
+        if (n.state.turn == 1) {
             int childnum = n.childList.size();
             for (int i = 0; i < childnum ; i++) { // for each possible move
 
