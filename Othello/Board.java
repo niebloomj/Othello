@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Arrays;
 
 public class Board {
 
@@ -232,6 +234,7 @@ public class Board {
 						break;
 					}
 				}
+
 		ArrayList<int[]> tempMoves = new ArrayList<int[]>(moves);
 		ArrayList<Integer> dupIndex = new ArrayList<Integer>();
 		for (int i = 0; i < tempMoves.size(); i++)
@@ -240,9 +243,10 @@ public class Board {
 					if (tempMoves.get(i)[0] == tempMoves.get(j)[0])
 						if (tempMoves.get(i)[1] == tempMoves.get(j)[1])
 							dupIndex.add(j);
-		Collections.sort(dupIndex);
-		for (int i = dupIndex.size() - 1; i >= 0; i --)
-			tempMoves.remove(i);
+		Comparator<Integer> comparator = Collections.reverseOrder();
+		Collections.sort(dupIndex, comparator);
+		for (int sub : dupIndex)
+			tempMoves.remove(sub);
 		return tempMoves;
 	}
 }
