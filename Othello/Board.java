@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.util.Collections;
 
 public class Board {
 
@@ -7,13 +7,13 @@ public class Board {
 	int turn = -1;
 	int[] prevMove;
 
-	public Board(int[][] newboard,int turn) {
-		
-        this.board = newboard;
-        this.turn =  turn;
+	public Board(int[][] newboard, int turn) {
+
+		this.board = newboard;
+		this.turn =  turn;
 	}
-    
-    
+
+
 
 	public Board() {
 		board = new int[8][8];
@@ -28,14 +28,14 @@ public class Board {
 
 	public void print() {
 		for (int[] sub : board) {
-            for (int subsub : sub){
-                if(subsub==1)
-				System.out.print("*" + " ");
-                else if(subsub==-1)
-                System.out.print("/" + " ");
-                else
-                System.out.print(0 + " ");
-            }
+			for (int subsub : sub) {
+				if (subsub == 1)
+					System.out.print("*" + " ");
+				else if (subsub == -1)
+					System.out.print("/" + " ");
+				else
+					System.out.print(0 + " ");
+			}
 			System.out.println();
 		}
 	}
@@ -92,10 +92,10 @@ public class Board {
 		else return false;
 	}
 
-	public ArrayList<int[]> getLegalMoves(){
-        
+	public ArrayList<int[]> getLegalMoves() {
+
 		ArrayList<int[]> moves = new ArrayList<int[]>();
-        
+
 		for (int i = 0; i < 8; i ++)
 			for (int j = 0; j < 8; j++)
 				if (board[i][j] == turn) {
@@ -232,6 +232,17 @@ public class Board {
 						break;
 					}
 				}
-		return moves;
+		ArrayList<int[]> tempMoves = new ArrayList<int[]>(moves);
+		ArrayList<Integer> dupIndex = new ArrayList<Integer>();
+		for (int i = 0; i < tempMoves.size(); i++)
+			for (int j = i + 1; j < tempMoves.size(); j++)
+				if (!dupIndex.contains(j))
+					if (tempMoves.get(i)[0] == tempMoves.get(j)[0])
+						if (tempMoves.get(i)[1] == tempMoves.get(j)[1])
+							dupIndex.add(j);
+		Collections.sort(dupIndex);
+		for (int i = dupIndex.size() - 1; i >= 0; i --)
+			tempMoves.remove(i);
+		return tempMoves;
 	}
 }
