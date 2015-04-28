@@ -9,7 +9,9 @@ public class main {
 
     public static void main(String[] args) {
         
-//        Scanner scan = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
+        
+        Board board = new Board(); //the initial board
 //        
 //        //first scan the game rule
 //        
@@ -17,40 +19,27 @@ public class main {
 //        
 //        playGame(command,scan);
         
-                Scanner scan = new Scanner(System.in);
+                while (true) {
         
-                Board board = new Board(); //the initial board
+                    System.out.println("Give me your x then your y");
+                    int x = scan.nextInt();
+                    int y = scan.nextInt();
+                    board.move(x, y);
+                    board.print();
         
-                board.board[3][2]=1; board.board[3][3]=1; board.board[3][4]=1;
-                board.board[4][2]=-1;board.board[4][3]=-1;board.board[4][4]=-1; board.board[4][5]=-1;
-                board.board[5][4]=1; board.board[6][1]=1;
+                    //Board temp=new Board(board.board,board.turn);
         
-                board.print();
+                    //everytime the opposite player will give me
+                    //a new board, and according to the new board we make a root,
+                    //and bbuild a new tree; then, do the ab pruning and return the
+                    //move we want to act to handle the opposite player's action.
+                    System.out.println("AI Goes");
         
-                for(int [] lm: board.getLegalMoves())
-                    System.out.println("("+lm[0]+","+lm[1]+")");
+                    int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
+                    board.move(decision[0], decision[1]);
         
-//                while (true) {
-//        
-//                    System.out.println("Give me your x then your y");
-//                    int x = scan.nextInt();
-//                    int y = scan.nextInt();
-//                    board.move(x, y);
-//                    board.print();
-//        
-//                    //Board temp=new Board(board.board,board.turn);
-//        
-//                    //everytime the opposite player will give me
-//                    //a new board, and according to the new board we make a root,
-//                    //and bbuild a new tree; then, do the ab pruning and return the
-//                    //move we want to act to handle the opposite player's action.
-//                    System.out.println("AI Goes");
-//        
-//                    int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
-//                    board.move(decision[0], decision[1]);
-//        
-//                    board.print();
-//                }
+                    board.print();
+                }
 
         
        
