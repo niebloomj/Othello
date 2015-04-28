@@ -16,16 +16,16 @@ public class node {
 	public ArrayList<node> childList;
 
 	public node(Board s) {
-        
-       
-        childList=new ArrayList<node>();
-		
-        //this.player = player;
-       
-        this.state=s;
+
+
+		childList = new ArrayList<node>();
+
+		//this.player = player;
+
+		this.state = s;
 		this.layer = 0;
-		
-        this.score = getScore();
+
+		this.score = getScore();
 
 	}
 
@@ -37,7 +37,7 @@ public class node {
 //		this.state.move(x, y);
 //		this.layer = 0;
 //		getScore();
-//        
+//
 //	}
 
 	/*
@@ -46,9 +46,9 @@ public class node {
 	*/
 	public void addChild(node child) {
 
-        //System.out.println("this child's layer is "+child.layer);
-		child.parent =this;
-        //System.out.println("this parent layer is:"+this.parent.layer);
+		//System.out.println("this child's layer is "+child.layer);
+		child.parent = this;
+		//System.out.println("this parent layer is:"+this.parent.layer);
 		// child.player = -(this.player);
 		this.childList.add(child);
 	}
@@ -69,33 +69,33 @@ public class node {
 
 		for (int[] move : this.state.getLegalMoves()) {
 
-            int[][] tempShit=new int[8][8];
-            
-            for(int i=0;i<state.board.length;i++){
-                for(int j=0;j<state.board[i].length;j++){
-                    
-                    tempShit[i][j]=state.board[i][j];
-                }
-            }
-            
-            Board tempBoard = new Board(tempShit,-(this.state.turn));
-            
-            tempBoard.move(move[0], move[1]);
-            //System.out.println("move!");
+			int[][] tempShit = new int[8][8];
+
+			for (int i = 0; i < state.board.length; i++) {
+				for (int j = 0; j < state.board[i].length; j++) {
+
+					tempShit[i][j] = state.board[i][j];
+				}
+			}
+
+			Board tempBoard = new Board(tempShit, -(this.state.turn));
+
+			tempBoard.move(move[0], move[1]);
+			//System.out.println("move!");
 			tuple t = new tuple(tempBoard, move[0], move[1]);
-            
-            //state.print();
+
+			//state.print();
 			//do the all flip stuffs, and return the most up-to-date board
 
 			boardTuple.add(t);
-		
-        }
-		
-        return boardTuple;
+
+		}
+
+		return boardTuple;
 	}
 
 	public boolean hasLegalMove() {
-        
+
 		return (this.state.getLegalMoves().size() != 0) ? true : false;
 	}
 
@@ -103,75 +103,75 @@ public class node {
 	 * the score is equivalent to the current number of our player
 	 * in the current board.
 	 */
-	public int getScore(){
-        
-        
-        double hscore = 0;
-        int minscore = 0;
-        int maxscore = 0;
-        
-        int badscore = 0;
-        int movability = 0;
-        
-        for(int i = 0; i< this.state.board.length; i++)
-            
-            for( int j = 0;j < this.state.board[i].length; j++){
-                
-                if(this.state.board[i][j] == 1){
-                    
-                    
-                    if(this.layer < 40){
-                        if((i == 1 && j == 0)||
-                           (i == 0 && j == 1)||
-                           (i == 1 && j == 7)||
-                           (i == 0 && j == 6)||
-                           (i == 6 && j == 0)||
-                           (i == 7 && j == 1)||
-                           (i == 6 && j == 7)||
-                           (i == 7 && j == 6))
-                            badscore = badscore -2;
-                        
-                        if((i == 1 && j == 1)||
-                           (i == 6 && j == 1)||
-                           (i == 1 && j == 6)||
-                           (i == 6 && j == 6))
-                            badscore -= 5;
-                    }
-                    
-                    maxscore++;
-                }
-                if(this.state.board[i][j] == -1)
-                    minscore++;
-                
-                
-            }
-        
-		      
-		      if(this.layer < 40)
-                  movability = this.state.getLegalMoves().size();
-        
-        
-        
-        
-        hscore = 1000 * ((double)maxscore - (double)minscore)/((double)maxscore + (double)minscore)
-        + (double)badscore + (double)movability;
-        
-        //this.score=hscore;
-        
-        return (int)hscore;
-        
-    
+	public int getScore() {
+
+
+		double hscore = 0;
+		int minscore = 0;
+		int maxscore = 0;
+
+		int badscore = 0;
+		int movability = 0;
+
+		for (int i = 0; i < this.state.board.length; i++)
+
+			for ( int j = 0; j < this.state.board[i].length; j++) {
+
+				if (this.state.board[i][j] == 1) {
+
+
+					if (this.layer < 40) {
+						if ((i == 1 && j == 0) ||
+						        (i == 0 && j == 1) ||
+						        (i == 1 && j == 7) ||
+						        (i == 0 && j == 6) ||
+						        (i == 6 && j == 0) ||
+						        (i == 7 && j == 1) ||
+						        (i == 6 && j == 7) ||
+						        (i == 7 && j == 6))
+							badscore = badscore - 2;
+
+						if ((i == 1 && j == 1) ||
+						        (i == 6 && j == 1) ||
+						        (i == 1 && j == 6) ||
+						        (i == 6 && j == 6))
+							badscore -= 5;
+					}
+
+					maxscore++;
+				}
+				if (this.state.board[i][j] == -1)
+					minscore++;
+
+
+			}
+
+
+		if (this.layer < 40)
+			movability = this.state.getLegalMoves().size();
+
+
+
+
+		hscore = 1000 * ((double)maxscore - (double)minscore) / ((double)maxscore + (double)minscore)
+		         + (double)badscore + (double)movability;
+
+		//this.score=hscore;
+
+		return (int)hscore;
+
+
 //		int score = 0;
 //		for (int i = 0; i < this.state.board.length; i++)
 //			for (int j = 0; j < this.state.board[i].length; j++)
 //				if (this.state.board[i][j] == (int)1)
 //					score++;
 //		return score;
-	
-    }
-    
-    
-    
+
+	}
+
+
+
 	/*
 	 * By using the canfilp and dofilp method to
 	 * update the board.
