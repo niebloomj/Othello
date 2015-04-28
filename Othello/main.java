@@ -22,31 +22,42 @@ public class main {
         //move we want to act to handle the opposite player's action.
 
         // getDecision(board, DEFAULT_DEPTH, 0, 0);
+        
+        board.board[3][2]=1; board.board[3][3]=1; board.board[3][4]=1;
+        board.board[4][2]=-1;board.board[4][3]=-1;board.board[4][4]=-1; board.board[4][5]=-1;
+        board.board[5][4]=1; board.board[6][1]=1;
+        
+        board.print();
+        
+        for(int [] lm: board.getLegalMoves())
+            System.out.println("("+lm[0]+","+lm[1]+")");
 
         
-        Scanner scan = new Scanner(System.in);
-        
-        while (true) {
-            
-            System.out.println("Give me your x then your y");
-            int x = scan.nextInt();
-            int y = scan.nextInt();
-            board.move(x, y);
-            board.print();
-            
-            //Board temp=new Board(board.board,board.turn);
-            
-            //everytime the opposite player will give me
-            //a new board, and according to the new board we make a root,
-            //and bbuild a new tree; then, do the ab pruning and return the
-            //move we want to act to handle the opposite player's action.
-            System.out.println("AI Goes");
-            
-            int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
-            board.move(decision[0], decision[1]);
-            
-            board.print();
-        }
+//        Scanner scan = new Scanner(System.in);
+//        
+//        
+//        
+//        while (true) {
+//            
+//            System.out.println("Give me your x then your y");
+//            int x = scan.nextInt();
+//            int y = scan.nextInt();
+//            board.move(x, y);
+//            board.print();
+//            
+//            //Board temp=new Board(board.board,board.turn);
+//            
+//            //everytime the opposite player will give me
+//            //a new board, and according to the new board we make a root,
+//            //and bbuild a new tree; then, do the ab pruning and return the
+//            //move we want to act to handle the opposite player's action.
+//            System.out.println("AI Goes");
+//            
+//            int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
+//            board.move(decision[0], decision[1]);
+//            
+//            board.print();
+//        }
 
 
     }
@@ -60,8 +71,8 @@ public class main {
         
         root.layer = currentDepth;
         
-
         build(root, depthLimit);
+        
         currentDepth += 2;
         //System.out.println(" before root: "+ root.alpha + " child: " + child.alpha);
         
@@ -82,8 +93,6 @@ public class main {
             }
         }
         
-        for(int[] lm:state.getLegalMoves())
-        System.out.println("("+lm[0]+","+lm[1]+")");
         
         return back.state.prevMove; //return move: [x,y]
 

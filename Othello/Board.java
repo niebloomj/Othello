@@ -92,9 +92,9 @@ public class Board {
 		else return false;
 	}
 
-	public ArrayList<int[]> getLegalMoves() {
+	public ArrayList<int[]> getLegalMoves(){
         
-		ArrayList<int[]> moves = new ArrayList<>();
+		ArrayList<int[]> moves = new ArrayList<int[]>();
         
 		for (int i = 0; i < 8; i ++)
 			for (int j = 0; j < 8; j++)
