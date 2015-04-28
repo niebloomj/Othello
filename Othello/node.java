@@ -17,6 +17,7 @@ public class node {
 
 	public node(Board s) {
         
+       
         childList=new ArrayList<node>();
 		
         //this.player = player;
@@ -24,7 +25,7 @@ public class node {
         this.state=s;
 		this.layer = 0;
 		
-        getScore();
+        this.score = getScore();
 
 	}
 
@@ -154,6 +155,8 @@ public class node {
         
         hscore = 1000 * ((double)maxscore - (double)minscore)/((double)maxscore + (double)minscore)
         + (double)badscore + (double)movability;
+        
+        //this.score=hscore;
         
         return (int)hscore;
         
