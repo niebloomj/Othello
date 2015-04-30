@@ -77,6 +77,7 @@ public class node {
 					tempShit[i][j] = state.board[i][j];
 				}
 			}
+            System.out.println("current player: " +this.state.turn);
 
 			Board tempBoard = new Board(tempShit, -(this.state.turn));
 
@@ -153,7 +154,7 @@ public class node {
 
 
 
-		hscore = 1000 * ((double)maxscore - (double)minscore) / ((double)maxscore + (double)minscore)
+		hscore = 100 * ((double)maxscore - (double)minscore) / ((double)maxscore + (double)minscore)
 		         + (double)badscore + (double)movability;
 
 		//this.score=hscore;

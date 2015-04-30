@@ -142,7 +142,7 @@ public class main {
         currentDepth += 2;
        
         AlphaBeta(root, root.alpha, root.beta);
-        
+        System.out.println(root.alpha + ", " + root.beta);
         node back = null;
         
         //System.out.println(root.childList.size());
@@ -200,10 +200,11 @@ public class main {
      */
     public static int AlphaBeta(node n, int alpha, int beta) {
 
-        if (!n.hasLegalMove())
+        if (n.childList == null)
             return n.score;
+      //  System.out.println("current player: " + n.state.turn);
         
-        if (n.state.turn == 1) {
+        if (n.state.turn == -1) {
             int childnum = n.childList.size();
             for (int i = 0; i < childnum ; i++) { // for each possible move
 
@@ -212,11 +213,12 @@ public class main {
                 if (value > n.alpha) {
                     n.alpha = value;
                 }
-                if (beta <= n.alpha) // pruning
-                    return n.beta;
+                if (n.beta <= n.alpha) // pruning
+                    //return n.beta;
+                    break;
             }
             return n.alpha;
-        } else { // for player == -1
+        } else { // for player == 1
             
             int childnum = n.childList.size();
             
@@ -226,9 +228,9 @@ public class main {
                 if (value < n.beta)
                     n.beta = value;
 
-                if (beta <= n.alpha) // pruning
-                    return n.alpha;
-
+                if (n.beta <= n.alpha) // pruning
+                    //return n.alpha;
+                    break;
             }
             return n.beta;
         }
