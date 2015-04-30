@@ -45,87 +45,6 @@ public class main {
        
         
     }
-//        //???do we neeed this to start a new game or we just need the
-//        //tournament's infrastructure to provide us with a either new board
-//        //or a new move(x,y) from the oppoiste player?????
-//
-//        Board board = new Board(); //the initial board
-//        
-//        //everytime the opposite player will give me
-//        //a new board, and according to the new board we make a root,
-//        //and bbuild a new tree; then, do the ab pruning and return the
-//        //move we want to act to handle the opposite player's action.
-//
-//        // getDecision(board, DEFAULT_DEPTH, 0, 0);
-//        
-//        board.board[3][2]=1; board.board[3][3]=1; board.board[3][4]=1;
-//        board.board[4][2]=-1;board.board[4][3]=-1;board.board[4][4]=-1; board.board[4][5]=-1;
-//        board.board[5][4]=1; board.board[6][1]=1;
-//        
-//        board.print();
-//        
-//        for(int [] lm: board.getLegalMoves())
-//            System.out.println("("+lm[0]+","+lm[1]+")");
-//
-//        
-
-
-//	public static void main(String[] args) {
-//
-//		System.out.println(Integer.MAX_VALUE);
-//		System.out.println(Integer.MIN_VALUE);
-//		//???do we neeed this to start a new game or we just need the
-//		//tournament's infrastructure to provide us with a either new board
-//		//or a new move(x,y) from the oppoiste player?????
-//
-//		Board board = new Board(); //the initial board
-//
-//		//everytime the opposite player will give me
-//		//a new board, and according to the new board we make a root,
-//		//and bbuild a new tree; then, do the ab pruning and return the
-//		//move we want to act to handle the opposite player's action.
-//
-//		// getDecision(board, DEFAULT_DEPTH, 0, 0);
-//
-//		board.board[3][2] = 1; board.board[3][3] = 1; board.board[3][4] = 1;
-//		board.board[4][2] = -1; board.board[4][3] = -1; board.board[4][4] = -1; board.board[4][5] = -1;
-//		board.board[5][4] = 1; board.board[6][1] = 1;
-//
-//		board.print();
-//
-//		for (int [] lm : board.getLegalMoves())
-//			System.out.println("(" + lm[0] + "," + lm[1] + ")");
-//
-//
-//>>>>>>> origin/master
-////        Scanner scan = new Scanner(System.in);
-////
-////
-////
-////        while (true) {
-////
-////            System.out.println("Give me your x then your y");
-////            int x = scan.nextInt();
-////            int y = scan.nextInt();
-////            board.move(x, y);
-////            board.print();
-////
-////            //Board temp=new Board(board.board,board.turn);
-////
-////            //everytime the opposite player will give me
-////            //a new board, and according to the new board we make a root,
-////            //and bbuild a new tree; then, do the ab pruning and return the
-////            //move we want to act to handle the opposite player's action.
-////            System.out.println("AI Goes");
-////
-////            int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
-////            board.move(decision[0], decision[1]);
-////
-////            board.print();
-////        }
-//
-//
-//<<<<<<< HEAD
     
 
     /*
@@ -177,10 +96,12 @@ public class main {
             
             ArrayList<tuple> childrenBoard = root.getChildBoards();
            
-            //System.out.println("the node layer is: "+root.layer);
+            //System.out.println("the node's player is: "+root.state.turn);
             
             for (tuple t : childrenBoard) {
                 
+                //System.out.println("the tuple's turn is "+t.board.turn);
+
                 node child = new node(t.board); //add new board
                 child.state.prevMove[0]=t.x;
                 child.state.prevMove[1]=t.y;
