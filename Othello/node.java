@@ -77,19 +77,19 @@ public class node {
 					tempShit[i][j] = state.board[i][j];
 				}
 			}
-<<<<<<< HEAD
-			//System.out.println("the parent board's turn is "+this.state.turn);
-=======
-            System.out.println("current player: " +this.state.turn);
 
->>>>>>> origin/master
+			//System.out.println("the parent board's turn is "+this.state.turn);
+
+            //System.out.println("current player: " +this.state.turn);
+
+
 			Board tempBoard = new Board(tempShit, -(this.state.turn));
 			//System.out.println("the new board's turn is "+tempBoard.turn);
 
 			tempBoard.move(move[0], move[1]);
 			//System.out.println("move!");
 			tuple t = new tuple(tempBoard, move[0], move[1]);
-			System.out.println("the original tuple turn is "+t.board.turn);
+			//System.out.println("the original tuple turn is "+t.board.turn);
 			//state.print();
 			//do the all flip stuffs, and return the most up-to-date board
 
