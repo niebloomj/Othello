@@ -68,8 +68,9 @@ public class main {
        
         for (node child : root.childList) {
             
+            System.out.println("root.alpha: " + root.alpha+"\nchild.alpha: "+child.beta);
             
-            if (child.alpha == root.alpha) {
+            if (child.beta == root.alpha) {
                 
                 back = child;
                 break;
@@ -120,12 +121,14 @@ public class main {
      * The alpha and beta pruning mechanism
      */
     public static int AlphaBeta(node n, int alpha, int beta) {
-
-        if (n.childList == null)
+        //System.out.println(n.score);
+        if (n.childList.size() == 0){
+           // System.out.println(n.score);
             return n.score;
-      //  System.out.println("current player: " + n.state.turn);
+        }
+        //System.out.println("current player: " + n.state.turn);
         
-        if (n.state.turn == -1) {
+        if (n.state.turn == 1) {
             int childnum = n.childList.size();
             for (int i = 0; i < childnum ; i++) { // for each possible move
 
@@ -135,11 +138,11 @@ public class main {
                     n.alpha = value;
                 }
                 if (n.beta <= n.alpha) // pruning
-                    //return n.beta;
-                    break;
+                    return n.beta;
+                    //break;
             }
             return n.alpha;
-        } else { // for player == 1
+        } else { // for player == -1
             
             int childnum = n.childList.size();
             
@@ -150,8 +153,8 @@ public class main {
                     n.beta = value;
 
                 if (n.beta <= n.alpha) // pruning
-                    //return n.alpha;
-                    break;
+                    return n.alpha;
+                    //break;
             }
             return n.beta;
         }

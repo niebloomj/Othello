@@ -135,13 +135,13 @@ public class node {
 						        (i == 7 && j == 1) ||
 						        (i == 6 && j == 7) ||
 						        (i == 7 && j == 6))
-							badscore = badscore - 2;
+							badscore = badscore - 4;
 
 						if ((i == 1 && j == 1) ||
 						        (i == 6 && j == 1) ||
 						        (i == 1 && j == 6) ||
 						        (i == 6 && j == 6))
-							badscore -= 5;
+							badscore -= 10;
 					}
 
 					maxscore++;
