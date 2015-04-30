@@ -82,9 +82,9 @@ public class node {
 
             //System.out.println("current player: " +this.state.turn);
 
-
-			Board tempBoard = new Board(tempShit, -(this.state.turn));
-			//System.out.println("the new board's turn is "+tempBoard.turn);
+            //System.out.println("the current board's turn is "+this.state.turn);
+			Board tempBoard = new Board(tempShit, (this.state.turn));
+			//System.out.println("the child board's turn is "+tempBoard.turn);
 
 			tempBoard.move(move[0], move[1]);
 			//System.out.println("move!");

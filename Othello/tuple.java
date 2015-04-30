@@ -7,8 +7,7 @@ public class tuple {
 
 	public tuple(Board b, int x, int y) {
         
-		this.board = new Board(b.board,b.turn);
-        board.prevMove=b.prevMove;
+        this.board=b;
 		this.x = x;
 		this.y = y;
 	}

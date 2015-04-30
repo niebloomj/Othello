@@ -12,7 +12,7 @@ public class Board {
 	public Board(int[][] newboard, int turn) {
 
 		this.board = newboard;
-		this.turn =  turn;
+		this.turn = turn;
 	}
 
 

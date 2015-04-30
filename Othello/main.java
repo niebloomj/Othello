@@ -100,7 +100,7 @@ public class main {
             
             for (tuple t : childrenBoard) {
                 
-                //System.out.println("the tuple's turn is "+t.board.turn);
+               // System.out.println("in main class the tuple's turn is "+t.board.turn);
 
                 node child = new node(t.board); //add new board
                 child.state.prevMove[0]=t.x;
