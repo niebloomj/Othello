@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class main {
 
 
-    public static final int DEFAULT_DEPTH = 4; //this is the default depth the tree will construct.
+    public static final int DEFAULT_DEPTH = 5; //this is the default depth the tree will construct.
     public static int currentDepth = 0;
 
     public static void main(String[] args) {
@@ -62,16 +62,17 @@ public class main {
        
         AlphaBeta(root, root.alpha, root.beta);
         System.out.println(root.alpha + ", " + root.beta);
+        
         node back = null;
         
         //System.out.println(root.childList.size());
        
         for (node child : root.childList) {
             
-            System.out.println("root.alpha: " + root.alpha+"\nchild.alpha: "+child.beta);
+            System.out.println("root.alpha: " + root.alpha+"\nchild.beta: "+child.beta);
             
             if (child.beta == root.alpha) {
-                
+                System.out.println("in");
                 back = child;
                 break;
             }
