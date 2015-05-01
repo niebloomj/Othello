@@ -5,9 +5,9 @@ import java.util.Arrays;
 
 public class Board {
 
-	int[][] board;
-	int turn = -1;
-	int[] prevMove;
+	public int[][] board;
+	public int turn = -1;
+	public int[] prevMove;
 
 	public Board(int[][] newboard, int turn) {
 
@@ -43,16 +43,21 @@ public class Board {
 	}
 
 	public void move(int x, int y) {
-		// board[x][y] = turn;
+		
+        // board[x][y] = turn;
 		Update(x, y);
-		//player 1
-		if (turn == 1)
-			turn = -1;
-		// player - 1
-		else if (turn == -1)
-			turn = 1;
-		prevMove = new int[] {x, y};
-	}
+		
+//        //player 1
+//		if (turn == 1)
+//			turn = -1;
+//		
+//        // player - 1
+//		else if (turn == -1)
+//			turn = 1;
+		
+        prevMove = new int[] {x, y};
+	
+    }
 
 	/*
 	 * use the canfilp and dofilp method to
