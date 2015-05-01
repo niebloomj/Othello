@@ -106,10 +106,10 @@ public class Board {
 		for (int i = 0; i < 8; i ++)
 			for (int j = 0; j < 8; j++)
 				if (board[i][j] == turn) {
-<<<<<<< HEAD
+
 					//System.out.println(i + " " + j);
-=======
->>>>>>> origin/master
+
+
 					//Up
 					boolean didJump = false;
 					int tempI = i;
