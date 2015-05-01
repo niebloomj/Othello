@@ -101,11 +101,12 @@ public class Board {
 		for (int i = 0; i < 8; i ++)
 			for (int j = 0; j < 8; j++)
 				if (board[i][j] == turn) {
+					System.out.println(i + " " + j);
 					//Up
 					boolean didJump = false;
 					int tempI = i;
 					int tempJ = j;
-					while (tempJ > 1) {
+					while (tempJ > 0) {
 						tempJ --;
 						if (board[tempI][tempJ] == turn)
 							break;
@@ -121,7 +122,7 @@ public class Board {
 					didJump = false;
 					tempI = i;
 					tempJ = j;
-					while (tempJ > 1 && tempI < 7) {
+					while (tempJ > 0 && tempI < 7) {
 						tempJ --;
 						tempI ++;
 						if (board[tempI][tempJ] == turn)
@@ -187,7 +188,7 @@ public class Board {
 					didJump = false;
 					tempI = i;
 					tempJ = j;
-					while (tempJ < 7 && tempI > 1) {
+					while (tempJ < 7 && tempI > 0) {
 						tempI --;
 						tempJ ++;
 						if (board[tempI][tempJ] == turn)
@@ -204,7 +205,7 @@ public class Board {
 					didJump = false;
 					tempI = i;
 					tempJ = j;
-					while (tempI > 1) {
+					while (tempI > 0) {
 						tempI --;
 						if (board[tempI][tempJ] == turn)
 							break;
@@ -220,7 +221,7 @@ public class Board {
 					didJump = false;
 					tempI = i;
 					tempJ = j;
-					while (tempI > 1 && tempJ > 1) {
+					while (tempI > 0 && tempJ > 0) {
 						tempJ --;
 						tempI --;
 						if (board[tempI][tempJ] == turn)
