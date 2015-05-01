@@ -19,15 +19,25 @@ public class main {
 //
 //        playGame(command,scan);
 
+		board.print();
 
-
+		String line;
+		int[] decision;
+		System.out.println("Ready?");
+		line = scan.nextLine();
 		while (true) {
 
-			System.out.println("Give me your x then your y");
-			int x = scan.nextInt();
-			int y = scan.nextInt();
-			board.move(x, y);
+			// System.out.println("Give me your x then your y");
+			// int x = scan.nextInt();
+			// int y = scan.nextInt();
+			// board.move(x, y);
+			// board.print();
+
+			decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
+			board.move(decision[0], decision[1]);
 			board.print();
+			System.out.println("Next?");
+			line = scan.nextLine();
 
 			//Board temp=new Board(board.board,board.turn);
 
@@ -35,12 +45,13 @@ public class main {
 			//a new board, and according to the new board we make a root,
 			//and bbuild a new tree; then, do the ab pruning and return the
 			//move we want to act to handle the opposite player's action.
-			System.out.println("AI Goes");
+			// System.out.println("AI Goes");
 
-			int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
+			decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
 			board.move(decision[0], decision[1]);
-
 			board.print();
+			System.out.println("Next?");
+			line = scan.nextLine();
 		}
 
 
@@ -145,8 +156,8 @@ public class main {
 				//break;
 			}
 			return n.alpha;
-		
-        } else { // for player == -1
+
+		} else { // for player == -1
 
 			int childnum = n.childList.size();
 
@@ -167,80 +178,79 @@ public class main {
 	}
 
 
-    public void playGame(String[] command, Scanner scan){
-        
-        
-        int DEPTHLIMIT;
-        double TIMELIMIT1,TIMELIMIT2;
-        
-        //ignore the first string, which is GAME, in command
-        DEPTHLIMIT=(command[2].equals("0"))? DEFAULT_DEPTH:Integer.parseInt(command[2]);
-        
-        TIMELIMIT1=Double.parseDouble(command[3]);
-        TIMELIMIT2=Double.parseDouble(command[4]);
-        
-        if(command[1].equals("B")){
-            
-            Board board = new Board(); //the initial board
-            board.turn=1;
-            //play as player 1
-            
-            while(true){
-                
-             int[] decision = getDecision(board, DEPTHLIMIT,TIMELIMIT1,TIMELIMIT2);
-             
-             board.move(decision[0], decision[1]);
-                
-             //the output for informing the opposite player
-             //our move
-             System.out.println(decision[0]+" "+decision[1]+"\n");
-            //parse the input from te oppoiste player
-            
-             String input=scan.nextLine();
-             
-             String[] move=input.split(" ");
-             
-            board.move(Integer.parseInt(move[0]),Integer.parseInt(move[1]));
-                
-            }
-       
-        }
-        else if(command[1].equals("W")){
-            
-            //play as player -1
-            Board board = new Board(); //the initial board
-            board.turn=-1;
-            
-            while(true){
-                
-                //parse the input from the oppoiste player
-                
-                String input=scan.nextLine();
-                
-                String[] move=input.split(" ");
-                
-                board.move(Integer.parseInt(move[0]),Integer.parseInt(move[1]));
-                
-                //make decision according to the move that
-                //opposite player have made
+	public void playGame(String[] command, Scanner scan) {
 
-                int[] decision = getDecision(board, DEPTHLIMIT,TIMELIMIT1,TIMELIMIT2);
-                
-                board.move(decision[0], decision[1]);
-                
-                //the output for informing the opposite player
-                //our move
-                System.out.println(decision[0]+" "+decision[1]+"\n");
-                
-                
-            }
 
-            
-        }
-        
-        
-        
-    }
+		int DEPTHLIMIT;
+		double TIMELIMIT1, TIMELIMIT2;
+
+		//ignore the first string, which is GAME, in command
+		DEPTHLIMIT = (command[2].equals("0")) ? DEFAULT_DEPTH : Integer.parseInt(command[2]);
+
+		TIMELIMIT1 = Double.parseDouble(command[3]);
+		TIMELIMIT2 = Double.parseDouble(command[4]);
+
+		if (command[1].equals("B")) {
+
+			Board board = new Board(); //the initial board
+			board.turn = 1;
+			//play as player 1
+
+			while (true) {
+
+				int[] decision = getDecision(board, DEPTHLIMIT, TIMELIMIT1, TIMELIMIT2);
+
+				board.move(decision[0], decision[1]);
+
+				//the output for informing the opposite player
+				//our move
+				System.out.println(decision[0] + " " + decision[1] + "\n");
+				//parse the input from te oppoiste player
+
+				String input = scan.nextLine();
+
+				String[] move = input.split(" ");
+
+				board.move(Integer.parseInt(move[0]), Integer.parseInt(move[1]));
+
+			}
+
+		} else if (command[1].equals("W")) {
+
+			//play as player -1
+			Board board = new Board(); //the initial board
+			board.turn = -1;
+
+			while (true) {
+
+				//parse the input from the oppoiste player
+
+				String input = scan.nextLine();
+
+				String[] move = input.split(" ");
+
+				board.move(Integer.parseInt(move[0]), Integer.parseInt(move[1]));
+
+				//make decision according to the move that
+				//opposite player have made
+
+				int[] decision = getDecision(board, DEPTHLIMIT, TIMELIMIT1, TIMELIMIT2);
+
+				board.move(decision[0], decision[1]);
+
+				//the output for informing the opposite player
+				//our move
+				System.out.println(decision[0] + " " + decision[1] + "\n");
+
+
+			}
+
+
+		}
+
+
+
+	}
 
 
 }
