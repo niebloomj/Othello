@@ -104,6 +104,11 @@ public class node {
 
 		return (this.state.getLegalMoves().size() != 0) ? true : false;
 	}
+    
+    public int getChildNumber(){
+        
+        return this.state.getLegalMoves().size();
+    }
 
 	/*
 	 * the score is equivalent to the current number of our player

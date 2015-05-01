@@ -101,7 +101,7 @@ public class Board {
 		for (int i = 0; i < 8; i ++)
 			for (int j = 0; j < 8; j++)
 				if (board[i][j] == turn) {
-					System.out.println(i + " " + j);
+					//System.out.println(i + " " + j);
 					//Up
 					boolean didJump = false;
 					int tempI = i;

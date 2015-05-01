@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class main {
 
 
-	public static final int DEFAULT_DEPTH = 5; //this is the default depth the tree will construct.
+	public static final int DEFAULT_DEPTH = 4; //this is the default depth the tree will construct.
 	public static int currentDepth = 0;
 
 	public static void main(String[] args) {
@@ -38,6 +38,7 @@ public class main {
 			System.out.println("AI Goes");
 
 			int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
+            
 			board.move(decision[0], decision[1]);
 
 			board.print();
@@ -57,13 +58,26 @@ public class main {
 		node root = new node(state);
 
 		root.layer = currentDepth;
-
+        
+        /*    time     |   depthLimit
+          -------------------------------
+                    1s |   3
+                    4s |  if childList num<7, depth=5, else depth=4
+               16s     |  if childList num<7, depth=6, if 7<childList num <11, depth=5, else depth=4
+            60s        |  if childList num<7, depth=6, if 7<childList num <12, depth=5, else depth=4
+            240s       |  if childList num<7, depth=6, if 7<childList num <15, depth=5, else depth=4
+         
+         //!!!! do more research on 240s
+         
+         */
+        
 		build(root, depthLimit);
 
 		currentDepth += 2;
 
 		AlphaBeta(root, root.alpha, root.beta);
-		System.out.println(root.alpha + ", " + root.beta);
+		
+        System.out.println(root.alpha + ", " + root.beta);
 
 		node back = null;
 
@@ -80,8 +94,12 @@ public class main {
 			}
 		}
 
-		for (int [] lm : state.getLegalMoves())
+        int count=0;
+        for (int [] lm : state.getLegalMoves()){
 			System.out.println("(" + lm[0] + "," + lm[1] + ")");
+            count++;
+        }
+        System.out.println("got child "+count);
 
 		return back.state.prevMove; //return move: [x,y]
 
