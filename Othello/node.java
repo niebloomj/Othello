@@ -119,7 +119,8 @@ public class node {
 		double hscore = 0;
 		int minscore = 0;
 		int maxscore = 0;
-
+        
+        int nicescore = 0;
 		int badscore = 0;
 		int movability = 0;
 
@@ -130,7 +131,7 @@ public class node {
 				if (this.state.board[i][j] == 1) {
 
 
-					if (this.layer < 40) {
+					if (this.layer < 45) {
 						if ((i == 1 && j == 0) ||
 						        (i == 0 && j == 1) ||
 						        (i == 1 && j == 7) ||
@@ -147,14 +148,31 @@ public class node {
 						        (i == 6 && j == 6))
 							badscore -= 10;
 					}
-
+                    
+                    if (this.layer > 12){
+                        if ((i == 0 && j == 0) ||
+                            (i == 0 && j == 7) ||
+                            (i == 7 && j == 7) ||
+                            (i == 7 && j == 0))
+                            nicescore = nicescore + 27;
+                        
+                        if(i == 0 || i == 7 || j == 0 || j ==7)
+                            nicescore = nicescore + 3;
+                    }
+                    
+                    
 					maxscore++;
-				}
+                    
+                }
+                
+                
+                //*********************************
 				if (this.state.board[i][j] == -1)
 					minscore++;
+                //**********************************
+                
 
-
-			}
+			}// end of for loop
 
 
 		if (this.layer < 40)
@@ -164,7 +182,7 @@ public class node {
 
 
 		hscore = 100 * ((double)maxscore - (double)minscore) / ((double)maxscore + (double)minscore)
-		         + (double)badscore + (double)movability;
+		         + (double)badscore + (double)movability + (double)nicescore;
 
 		
 
