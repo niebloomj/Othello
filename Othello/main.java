@@ -106,7 +106,7 @@ public class main {
 
             int breakcount=0;
             
-            for(int[][] move: root.getLegalMoves()){
+            for(int[][] move: root.state.getLegalMoves()){
                
                 breakcount++;
                 //if this node has too many children
