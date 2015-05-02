@@ -22,7 +22,7 @@ The move function takes the responsibility of checking canFlip, making doFile as
 Moreover, the getLegalMoves method returns an array list of moves (x,y) that we can take. 
 
 Node.java
-Node is the fundamental element of the tree structure. Each node contains a board, a layer number, a score, a parent and a child list. The primary functions inside this file is adding child and getting score. The get score function is actually where we put our heuristic function in.
+Node is the fundamental element of the tree structure. Each node contains a board, a layer number, a score, a parent and a child list. The primary functions inside this file is adding child and getting score. The get score function is actually where we put our heuristic function.
 
 Tuple.java
 This class is here for passing data from node class to main class. The data it passes are board and move. 
