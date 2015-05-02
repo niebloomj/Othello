@@ -149,12 +149,12 @@ public class node {
 							badscore -= 10;
 					}
                     
-                    if (this.layer > 12){
+                    if (this.layer > 12 ){
                         if ((i == 0 && j == 0) ||
                             (i == 0 && j == 7) ||
                             (i == 7 && j == 7) ||
                             (i == 7 && j == 0))
-                            nicescore = nicescore + 27;
+                            nicescore = nicescore + 47;
                         
                         if(i == 0 || i == 7 || j == 0 || j ==7)
                             nicescore = nicescore + 3;
