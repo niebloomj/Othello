@@ -53,15 +53,16 @@ public class main {
             back=root.childList.get(0);
         
         }else{
-            System.out.println("root.alpha: " + root.alpha + "root.beta: " + root.beta);
+           // System.out.println("root.alpha: " + root.alpha + "root.beta: " + root.beta);
         AlphaBeta(root, root.alpha, root.beta);
         
 		for (node child : root.childList) {
             
-			//System.out.println("root.alpha: " + root.alpha + "\nchild.beta: " + child.beta);
-            
+//			System.out.println("root.alpha: " + root.alpha + "\nchild.beta: " + child.beta+
+//                               "\nchild premove" +"(" +child.state.prevMove[0] +","+child.state.prevMove[1]+")");
+//            
             if (child.beta == root.alpha) {
-				System.out.println("final alpha: " + root.alpha);
+				//System.out.println("final alpha: " + root.alpha);
 				back = child;
 				break;
 			}
@@ -118,10 +119,48 @@ public class main {
             
         
 		if (n.childList.size() == 0) {
-			 System.out.println(n.score);
+			 //System.out.println(n.score);
 			return n.score;
 		}
 		
+        int childcount = n.childList.size();
+        //first-policy move:
+        if(n.parent == null){
+            for (int i = 0; i < childcount ; i++){
+            
+                if((n.childList.get(i).state.prevMove[0]== 0 && n.childList.get(i).state.prevMove[1]== 0)||
+                   (n.childList.get(i).state.prevMove[0]== 0 && n.childList.get(i).state.prevMove[1]== 7)||
+                   (n.childList.get(i).state.prevMove[0]== 7 && n.childList.get(i).state.prevMove[1]== 7)||
+                   (n.childList.get(i).state.prevMove[0]== 7 && n.childList.get(i).state.prevMove[1]== 0)
+                   )
+                {
+                    n.alpha = 10000;
+                    n.childList.get(i).beta = 10000;
+//                    System.out.println("conner :"+n.childList.get(i).state.prevMove[0]+" "+
+//                                       n.childList.get(i).state.prevMove[1]);
+                    return 1;
+                }
+                
+                
+                if(n.childList.get(i).state.prevMove[0]== 0||n.childList.get(i).state.prevMove[0]== 7||
+                   n.childList.get(i).state.prevMove[1]== 0||n.childList.get(i).state.prevMove[1]== 7)
+                {
+//                    System.out.println("edge:"+n.childList.get(i).state.prevMove[0]+" "+
+//                                       n.childList.get(i).state.prevMove[1]);
+                    n.alpha = 10000;
+                    n.childList.get(i).beta = 10000;
+                    return 1;
+                }
+            
+            
+            
+            }
+           
+        }
+        
+        
+        
+        
        // System.out.println("current player: " + n.state.turn);
 
 		if (n.state.turn == 1) {
@@ -129,7 +168,7 @@ public class main {
             int childnum = n.childList.size();
 			
             for (int i = 0; i < childnum ; i++) { // for each possible move
-
+                
 				int value = AlphaBeta(n.childList.get(i),n.alpha,n.beta);
 
 				if (value > n.alpha) {
@@ -137,7 +176,7 @@ public class main {
 				}
                 if (n.beta <= a){ // pruning
 					
-                    System.out.println("alpha pruning in");
+                    //System.out.println("alpha pruning in");
                     
                     //return n.beta;
 				    break;
@@ -156,7 +195,7 @@ public class main {
 					n.beta = value;
 
                 if (n.beta <= a){ // pruning
-					System.out.println("beta pruning in");
+					//System.out.println("beta pruning in");
                     //return n.alpha;
 				    break;
             }

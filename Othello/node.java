@@ -139,34 +139,34 @@ public class node {
 						        (i == 7 && j == 1) ||
 						        (i == 6 && j == 7) ||
                             (i == 7 && j == 6)){
-							badscore = badscore - 4;
+							badscore = badscore - 13;
                         }
 						if ((i == 1 && j == 1) ||
 						        (i == 6 && j == 1) ||
 						        (i == 1 && j == 6) ||
                             (i == 6 && j == 6)){
-							badscore -= 10;
+							badscore -= 21;
                         }
                     }
                         if ((i == 0 && j == 0) ||
                             (i == 0 && j == 7) ||
                             (i == 7 && j == 7) ||
                             (i == 7 && j == 0)){
-                            nicescore = nicescore + 97;
+                            nicescore = nicescore + 1097;
                         }
                         
                         if(i == 0 || i == 7 || j == 0 || j ==7)
-                            nicescore = nicescore + 3;
+                            nicescore = nicescore + 27;
                             //System.out.println("nice score edge");
 
-					maxscore++;
+					maxscore = maxscore + 3;
                     
                 }
                 
                 
                 //*********************************
                 if (this.state.board[i][j] == -1){
-					minscore++;
+					minscore= minscore + 3;
                  
                     if (this.layer < 45) {
                         
@@ -178,24 +178,24 @@ public class node {
                             (i == 7 && j == 1) ||
                             (i == 6 && j == 7) ||
                             (i == 7 && j == 6)){
-                            badscore = badscore + 3;
+                            badscore = badscore + 7;
                         }
                         if ((i == 1 && j == 1) ||
                             (i == 6 && j == 1) ||
                             (i == 1 && j == 6) ||
                             (i == 6 && j == 6)){
-                            badscore += 10;
+                            badscore += 11;
                         }
                     }
                     if ((i == 0 && j == 0) ||
                         (i == 0 && j == 7) ||
                         (i == 7 && j == 7) ||
                         (i == 7 && j == 0)){
-                        nicescore = nicescore - 97;
+                        nicescore = nicescore - 197;
                     }
                     
                     if(i == 0 || i == 7 || j == 0 || j ==7)
-                        nicescore = nicescore - 3;
+                        nicescore = nicescore - 27;
                     
                 }
                 //**********************************
