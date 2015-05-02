@@ -61,7 +61,7 @@ public class main {
 			//System.out.println("root.alpha: " + root.alpha + "\nchild.beta: " + child.beta);
             
             if (child.beta == root.alpha) {
-				
+				System.out.println("final alpha: " + root.alpha);
 				back = child;
 				break;
 			}
@@ -124,7 +124,7 @@ public class main {
             
         
 		if (n.childList.size() == 0) {
-			 //System.out.println(n.score);
+			 System.out.println(n.score);
 			return n.score;
 		}
 		
@@ -145,8 +145,8 @@ public class main {
 					
                     //System.out.println("in");
                     
-                    return n.beta;
-				//break;
+                    //return n.beta;
+				    break;
                 }
 			}
 			return n.alpha;
@@ -163,8 +163,8 @@ public class main {
 
                 if (n.beta <= n.alpha){ // pruning
 					//System.out.println("also in");
-                    return n.alpha;
-				//break;
+                    //return n.alpha;
+				    break;
             }
 			}
 			return n.beta;

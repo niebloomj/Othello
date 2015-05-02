@@ -62,7 +62,7 @@ public class node {
             
             breakcount++;
             
-            if(breakcount>=10){
+            if(breakcount>=8){
                 
                 break;
             }
@@ -129,9 +129,8 @@ public class node {
 			for ( int j = 0; j < this.state.board[i].length; j++) {
 
 				if (this.state.board[i][j] == 1) {
-
-
 					if (this.layer < 45) {
+                        
 						if ((i == 1 && j == 0) ||
 						        (i == 0 && j == 1) ||
 						        (i == 1 && j == 7) ||
@@ -139,36 +138,66 @@ public class node {
 						        (i == 6 && j == 0) ||
 						        (i == 7 && j == 1) ||
 						        (i == 6 && j == 7) ||
-						        (i == 7 && j == 6))
+                            (i == 7 && j == 6)){
 							badscore = badscore - 4;
-
+                        }
 						if ((i == 1 && j == 1) ||
 						        (i == 6 && j == 1) ||
 						        (i == 1 && j == 6) ||
-						        (i == 6 && j == 6))
+                            (i == 6 && j == 6)){
 							badscore -= 10;
-					}
-                    
-                    if (this.layer > 12 ){
+                        }
+                    }
                         if ((i == 0 && j == 0) ||
                             (i == 0 && j == 7) ||
                             (i == 7 && j == 7) ||
-                            (i == 7 && j == 0))
-                            nicescore = nicescore + 47;
+                            (i == 7 && j == 0)){
+                            nicescore = nicescore + 97;
+                        }
                         
                         if(i == 0 || i == 7 || j == 0 || j ==7)
                             nicescore = nicescore + 3;
-                    }
-                    
-                    
+                            //System.out.println("nice score edge");
+
 					maxscore++;
                     
                 }
                 
                 
                 //*********************************
-				if (this.state.board[i][j] == -1)
+                if (this.state.board[i][j] == -1){
 					minscore++;
+                 
+                    if (this.layer < 45) {
+                        
+                        if ((i == 1 && j == 0) ||
+                            (i == 0 && j == 1) ||
+                            (i == 1 && j == 7) ||
+                            (i == 0 && j == 6) ||
+                            (i == 6 && j == 0) ||
+                            (i == 7 && j == 1) ||
+                            (i == 6 && j == 7) ||
+                            (i == 7 && j == 6)){
+                            badscore = badscore + 3;
+                        }
+                        if ((i == 1 && j == 1) ||
+                            (i == 6 && j == 1) ||
+                            (i == 1 && j == 6) ||
+                            (i == 6 && j == 6)){
+                            badscore += 10;
+                        }
+                    }
+                    if ((i == 0 && j == 0) ||
+                        (i == 0 && j == 7) ||
+                        (i == 7 && j == 7) ||
+                        (i == 7 && j == 0)){
+                        nicescore = nicescore - 97;
+                    }
+                    
+                    if(i == 0 || i == 7 || j == 0 || j ==7)
+                        nicescore = nicescore - 3;
+                    
+                }
                 //**********************************
                 
 
