@@ -95,15 +95,9 @@ public class main {
 
 			ArrayList<tuple> childrenBoard = root.getChildBoards();
             
-            
+            for (tuple t : childrenBoard) {
 
-			//System.out.println("the node's player is: "+root.state.turn);
-
-			for (tuple t : childrenBoard) {
-
-				//System.out.println("in main class the tuple's turn is "+t.board.turn);
-
-				node child = new node(t.board); //add new board
+                node child = new node(t.board); //add new board
 				child.state.prevMove[0] = t.x;
 				child.state.prevMove[1] = t.y;
 				child.layer = root.layer + 1;
@@ -172,7 +166,9 @@ public class main {
 
 
 	}
-
+    /*
+     *
+     */
     public static int determineDepthByTime(node root,double timeLimit1){
         
         
@@ -187,11 +183,11 @@ public class main {
             
         }else if(timeLimit1==4){
             
-            depthLimit=(childnum<=7)?5:4;
+            depthLimit=(childnum<=6)?5:4;
             
         }else if(timeLimit1==16){
             
-            if(childnum<7)
+            if(childnum<=6)
                 depthLimit=6;
             else if(childnum>=7&&childnum<11)
                 depthLimit=5;
@@ -200,7 +196,7 @@ public class main {
             
         }else if(timeLimit1==60){
             
-            if(childnum<7)
+            if(childnum<=6)
                 depthLimit=6;
             else if(childnum>=7&&childnum<13)
                 depthLimit=5;
@@ -210,7 +206,7 @@ public class main {
             
         }else if(timeLimit1==240){
             
-            if(childnum<7)
+            if(childnum<=6)
                 depthLimit=6;
             else if(childnum>=7&&childnum<10)
                 depthLimit=5;
@@ -222,6 +218,9 @@ public class main {
         return depthLimit;
         
     }
+    /*
+     * The mechanism for connecting the game platform
+     */
 	public static void playGame(String[] command, Scanner scan) {
 
 
@@ -352,6 +351,11 @@ public class main {
             }
         }
     }
+    
+    /*
+     * detect whether the current has grand child or not
+     */
+    
     public static boolean isLonelyGrandpa(node root){
         
         if(root.childList.size()==1&&root.childList.get(0).childList.size()==0)
