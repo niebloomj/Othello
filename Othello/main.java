@@ -9,39 +9,39 @@ public class main {
 
 	public static void main(String[] args) {
 
-//		
+		
         Scanner scan = new Scanner(System.in);
-//
-//		Board board = new Board(); //the initial board
+
+		Board board = new Board(); //the initial board
+        
+        String[] command=scan.nextLine().split(" ");
+        
+        playGame(command,scan);
+        
+//        int[][] test=new int[8][8];
 //        
-//        String[] command=scan.nextLine().split(" ");
+//        for(int i=0;i<8;i++){
+//            for(int j=0;j<8;j++)
+//                test[i][j]=0;
+//        }
 //        
-//        playGame(command,scan);
-        
-        int[][] test=new int[8][8];
-        
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++)
-                test[i][j]=0;
-        }
-        
-        test[2][1]=1;test[2][4]=1;test[3][1]=1;
-        test[3][5]=1;test[4][2]=1;test[5][2]=1;
-        test[5][3]=1;test[5][4]=1;test[5][5]=1;
-        test[6][2]=1;test[6][4]=1;test[6][6]=1;
-        
-        for(int i=0;i<8;i++){
-            for(int j=0;j<8;j++)
-                if(test[i][j]==0)
-                test[i][j]=-1;
-        }
-        
-        test[1][7]=0;
-        
-        Board b=new Board(test,1);
-        int[] move=getDecision(b,DEFAULT_DEPTH,0,0);
-        
-        System.out.println(move[0]+" "+move[1]);
+//        test[2][1]=1;test[2][4]=1;test[3][1]=1;
+//        test[3][5]=1;test[4][2]=1;test[5][2]=1;
+//        test[5][3]=1;test[5][4]=1;test[5][5]=1;
+//        test[6][2]=1;test[6][4]=1;test[6][6]=1;
+//        
+//        for(int i=0;i<8;i++){
+//            for(int j=0;j<8;j++)
+//                if(test[i][j]==0)
+//                test[i][j]=-1;
+//        }
+//        
+//        test[1][7]=0;
+//        
+//        Board b=new Board(test,1);
+//        int[] move=getDecision(b,DEFAULT_DEPTH,0,0);
+//        
+//        System.out.println(move[0]+" "+move[1]);
 //
 //        System.out.println("size is: "+new Board(test,1).getLegalMoves().size());
 
