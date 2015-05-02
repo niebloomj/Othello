@@ -29,17 +29,6 @@ public class node {
 
 	}
 
-
-//	public node(Board state, int x, int y) {
-//
-//
-//		this.state = state;
-//		this.state.move(x, y);
-//		this.layer = 0;
-//		getScore();
-//
-//	}
-
 	/*
 	 * take current player and state
 	 * to create a new child node
@@ -66,13 +55,23 @@ public class node {
 		//the tuple contains the new board
 		//and the move, which directs to the new board
 		ArrayList<tuple> boardTuple = new ArrayList<tuple>();
+        
+        int breakcount=0;
 
-		for (int[] move : this.state.getLegalMoves()) {
-
+        for (int[] move : this.state.getLegalMoves()) {
+            
+            breakcount++;
+            
+            if(breakcount>=10){
+                
+                break;
+            }
+            
 			int[][] tempShit = new int[8][8];
 
 			for (int i = 0; i < state.board.length; i++) {
-				for (int j = 0; j < state.board[i].length; j++) {
+				
+                for (int j = 0; j < state.board[i].length; j++) {
 
 					tempShit[i][j] = state.board[i][j];
 				}
@@ -167,59 +166,18 @@ public class node {
 		hscore = 100 * ((double)maxscore - (double)minscore) / ((double)maxscore + (double)minscore)
 		         + (double)badscore + (double)movability;
 
-		//this.score=hscore;
+		
 
 		return (int)hscore;
 
 
-//		int score = 0;
-//		for (int i = 0; i < this.state.board.length; i++)
-//			for (int j = 0; j < this.state.board[i].length; j++)
-//				if (this.state.board[i][j] == (int)1)
-//					score++;
-//		return score;
+
 
 	}
 
 
 
-	/*
-	 * By using the canfilp and dofilp method to
-	 * update the board.
-	 */
-	// public void Update(Board state, int X, int Y) {
-	// 	int i, j;
 
-	// 	if (X < 0) return; /* pass move */
-	// 	if (state[X][Y] != 0) {
-	// 		printboard(state, player, turn, X, Y);
-	// 		System.out.println("Illegal move");
-	// 	}
-	// 	state[X][Y] = player;
-	// 	for (i = -1; i <= 1; i++)
-	// 		for (j = -1; j <= 1; j++)
-	// 			if ((i != 0 || j != 0) && CanFlip(state, player, X, Y, i, j))
-	// 				DoFlip(state, player, X, Y, i, j);
-	// }
-
-	// public void DoFlip(int[][] state, int player, int X, int Y, int dirX, int dirY) {
-	// 	while (X + dirX < 8 && X + dirX >= 0 && Y + dirY < 8 && Y + dirY >= 0 && state[X + dirX][Y + dirY] == -player) {
-	// 		X = X + dirX; Y = Y + dirY;
-	// 		state[X][Y] = player;
-	// 	}
-	// }
-
-	// public boolean CanFlip(int[][] state, int player, int X, int Y, int dirX, int dirY) {
-	// 	int capture = false;
-	// 	while (X + dirX < 8 && X + dirX >= 0 && Y + dirY < 8 && Y + dirY >= 0 && state[X + dirX][Y + dirY] == -player) {
-	// 		X = X + dirX; Y = Y + dirY;
-	// 		capture = true;
-	// 	}
-	// 	if (capture == false) return false;
-	// 	if (X + dirX < 8 && X + dirX >= 0 && Y + dirY < 8 && Y + dirY >= 0 && state[X + dirX][Y + dirY] == player)
-	// 		return true;
-	// 	else return false;
-	// }
 
 
 

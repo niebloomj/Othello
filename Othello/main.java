@@ -9,67 +9,44 @@ public class main {
 
 	public static void main(String[] args) {
 
-		Scanner scan = new Scanner(System.in);
-
-		Board board = new Board(); //the initial board
-        
-        String[] command=scan.nextLine().split(" ");
-        
-        playGame(command,scan);
-        
+//		
+        Scanner scan = new Scanner(System.in);
 //
-//        //first scan the game rule
-//
-//
-//
+//		Board board = new Board(); //the initial board
+//        
+//        String[] command=scan.nextLine().split(" ");
+//        
 //        playGame(command,scan);
-
-//		board.print();
+        
+        int[][] test=new int[8][8];
+        
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++)
+                test[i][j]=0;
+        }
+        
+        test[2][1]=1;test[2][4]=1;test[3][1]=1;
+        test[3][5]=1;test[4][2]=1;test[5][2]=1;
+        test[5][3]=1;test[5][4]=1;test[5][5]=1;
+        test[6][2]=1;test[6][4]=1;test[6][6]=1;
+        
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++)
+                if(test[i][j]==0)
+                test[i][j]=-1;
+        }
+        
+        test[1][7]=0;
+        
+        Board b=new Board(test,1);
+        int[] move=getDecision(b,DEFAULT_DEPTH,0,0);
+        
+        System.out.println(move[0]+" "+move[1]);
 //
-//		String line;
-//		int[] decision;
-//		System.out.println("Ready?");
-//		line = scan.nextLine();
-		//while (true) {
-
-			// System.out.println("Give me your x then your y");
-			// int x = scan.nextInt();
-			// int y = scan.nextInt();
-			// board.move(x, y);
-			// board.print();
-
-//			decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
-//			board.move(decision[0], decision[1]);
-//			board.print();
-//			System.out.println("Next?");
-//			line = scan.nextLine();
-
-			//Board temp=new Board(board.board,board.turn);
-
-			//everytime the opposite player will give me
-			//a new board, and according to the new board we make a root,
-			//and bbuild a new tree; then, do the ab pruning and return the
-			//move we want to act to handle the opposite player's action.
-			// System.out.println("AI Goes");
-//
-//
-//                int[] decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
-//                
-//
-//                decision = getDecision(board, DEFAULT_DEPTH, 0, 0);
-//
-//                board.move(decision[0], decision[1]);
-//                board.print();
-//                System.out.println("Next?");
-//                line = scan.nextLine();
-		
-
-
-
+//        System.out.println("size is: "+new Board(test,1).getLegalMoves().size());
 
 	}
-
-
+    
 	/*
 	 * this method returns an int[], which is the move that the current node contains
 	 */
@@ -83,47 +60,51 @@ public class main {
         
         /*    time     |   depthLimit
           -------------------------------
-                    1s |   3
-                    4s |  if childList num<7, depth=5, else depth=4
-               16s     |  if childList num<7, depth=6, if 7<childList num <11, depth=5, else depth=4
-            60s        |  if childList num<7, depth=6, if 7<childList num <13, depth=5, else depth=4
-            240s       |  if childList num<7, depth=6, if 7<childList num <15, depth=5, else depth=4
-         
-         //!!!! do more research on 240s
-         
-         */
+                     1s|   3
+                     4s|  if childList num<7, depth=5, else depth=4
+                    16s|  if childList num<7, depth=6, if 7<childList num <11, depth=5, else depth=4
+                    60s|  if childList num<7, depth=6, if 7<childList num <13, depth=5, else depth=4
+                   240s|  if childList num<7, depth=6, if 7<childList num <15, depth=5, else depth=4
+    */
         
         build(root, determineDepthByTime(root,timeLimit1));
 
 		currentDepth += 2;
-
-		AlphaBeta(root, root.alpha, root.beta);
-		
-        System.out.println(root.alpha + ", " + root.beta);
-
-		node back = null;
-
-		//System.out.println(root.childList.size());
-
+        
+        node back = null;
+        
+        
+        if(isLonelyGrandpa(root)){
+           
+            back=root.childList.get(0);
+        
+        }else{
+            
+        AlphaBeta(root, root.alpha, root.beta);
+        
 		for (node child : root.childList) {
-
-			System.out.println("root.alpha: " + root.alpha + "\nchild.beta: " + child.beta);
-
-			if (child.beta == root.alpha) {
-				System.out.println("in");
+            
+			//System.out.println("root.alpha: " + root.alpha + "\nchild.beta: " + child.beta);
+            
+            if (child.beta == root.alpha) {
+				
 				back = child;
 				break;
 			}
-		}
-
-        int count=0;
-        for (int [] lm : state.getLegalMoves()){
-			System.out.println("(" + lm[0] + "," + lm[1] + ")");
-            count++;
         }
-        System.out.println("got child "+count);
+    }
 
-		return back.state.prevMove; //return move: [x,y]
+        if(back==null){
+            
+            //System.out.println("into the null pointer block");
+            return new int[] {-1,-1};
+       
+        }else{
+            
+        return back.state.prevMove; //return move: [x,y]
+            
+        }
+		
 
 	}
 
@@ -139,6 +120,8 @@ public class main {
 
 
 			ArrayList<tuple> childrenBoard = root.getChildBoards();
+            
+            
 
 			//System.out.println("the node's player is: "+root.state.turn);
 
@@ -151,7 +134,6 @@ public class main {
 				child.state.prevMove[1] = t.y;
 				child.layer = root.layer + 1;
 				root.addChild(child);
-
 				build(child, depthLimit);
 			}
 
@@ -168,14 +150,17 @@ public class main {
             
         
 		if (n.childList.size() == 0) {
-			// System.out.println(n.score);
+			 System.out.println(n.score);
 			return n.score;
 		}
-		System.out.println("current player: " + n.state.turn);
+		
+       // System.out.println("current player: " + n.state.turn);
 
 		if (n.state.turn == 1) {
-			int childnum = n.childList.size();
-			for (int i = 0; i < childnum ; i++) { // for each possible move
+			
+            int childnum = n.childList.size();
+			
+            for (int i = 0; i < childnum ; i++) { // for each possible move
 
 				int value = AlphaBeta(n.childList.get(i), n.alpha, n.beta);
 
@@ -183,7 +168,9 @@ public class main {
 					n.alpha = value;
 				}
                 if (n.beta <= n.alpha){ // pruning
-					System.out.println("in");
+					
+                    System.out.println("in");
+                    
                     return n.beta;
 				//break;
                 }
@@ -214,8 +201,10 @@ public class main {
 
     public static int determineDepthByTime(node root,double timeLimit1){
         
+        
         int depthLimit=DEFAULT_DEPTH;
         
+       
         int childnum=root.getChildNumber();
         
         if(timeLimit1==1){
@@ -249,7 +238,7 @@ public class main {
             
             if(childnum<7)
                 depthLimit=6;
-            else if(childnum>=7&&childnum<15)
+            else if(childnum>=7&&childnum<10)
                 depthLimit=5;
             else
                 depthLimit=4;
@@ -280,12 +269,30 @@ public class main {
 			while (true) {
                 
                 board.turn=1;
-				int[] decision = getDecision(board, DEPTHLIMIT, TIMELIMIT1, TIMELIMIT2);
-                board.move(decision[0], decision[1]);
-                board.print();
-				//the output for informing the opposite player
-				//our move
-				System.out.println(decision[0]+" "+decision[1] + "\n");
+                
+                if(board.getLegalMoves().size()!=0){
+                    
+                    int[] decision = getDecision(board, DEPTHLIMIT, TIMELIMIT1, TIMELIMIT2);
+                    
+                    if(decision[0]==-1&&decision[1]==-1){
+                        
+                        System.out.println("pass");
+                    
+                    }else{
+                        
+                        board.move(decision[0], decision[1]);
+                        //the output for informing the opposite player
+                        //our move
+                        System.out.println(decision[0]+" "+decision[1] + "\n");
+                        board.print();
+                    }
+                    
+                    
+                }else{
+                    
+                    System.out.println("pass");
+                }
+
 				//parse the input from te oppoiste player
 
 				String input = scan.nextLine();
@@ -304,7 +311,7 @@ public class main {
 
 			}
 
-		} else if (command[1].equals("W")) {
+		} else if(command[1].equals("W")){
 
 			//play as player -1
 			Board board = new Board(); //the initial board
@@ -325,20 +332,41 @@ public class main {
 				//opposite player have made
 
                 board.turn = 1;
-				int[] decision = getDecision(board, DEPTHLIMIT, TIMELIMIT1, TIMELIMIT2);
-				board.move(decision[0], decision[1]);
-
-				//the output for informing the opposite player
-				//our move
-				System.out.println(decision[0] + " " + decision[1] + "\n");
+                
+                if(board.getLegalMoves().size()!=0){
+                    
+                    int[] decision = getDecision(board, DEPTHLIMIT, TIMELIMIT1, TIMELIMIT2);
+                    
+                    if(decision[0]==-1&&decision[1]==-1){
+                        
+                        System.out.println("pass");
+                        
+                    }else{
+                        
+                        board.move(decision[0], decision[1]);
+                        //the output for informing the opposite player
+                        //our move
+                        System.out.println(decision[0]+" "+decision[1] + "\n");
+                        
+                    }
+                    
+                    
+                }else{
+                    
+                    System.out.println("pass");
+                }
 
             }
-
-		}
-
-
-
-	}
-
+        }
+    }
+    public static boolean isLonelyGrandpa(node root){
+        
+        if(root.childList.size()==1&&root.childList.get(0).childList.size()==0)
+            return true;
+        else
+            return false;
+        
+        
+    }
 
 }
