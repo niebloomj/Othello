@@ -20,8 +20,6 @@ public class node {
 
 		childList = new ArrayList<node>();
 
-		//this.player = player;
-
 		this.state = s;
 		this.layer = 0;
 
@@ -34,12 +32,11 @@ public class node {
 	 * to create a new child node
 	*/
 	public void addChild(node child) {
-
-		//System.out.println("this child's layer is "+child.layer);
+        
+		
 		child.parent = this;
-		//System.out.println("this parent layer is:"+this.parent.layer);
-		// child.player = -(this.player);
-		this.childList.add(child);
+        this.childList.add(child);
+        
 	}
 
 	public void setParent(node parent) {
@@ -50,54 +47,54 @@ public class node {
 		this.layer = layer;
 	}
 
-	public ArrayList<tuple> getChildBoards() {
-
-		//the tuple contains the new board
-		//and the move, which directs to the new board
-		ArrayList<tuple> boardTuple = new ArrayList<tuple>();
-        
-        int breakcount=0;
-
-        for (int[] move : this.state.getLegalMoves()) {
-            
-            breakcount++;
-            
-            if(breakcount>=8){
-                
-                break;
-            }
-            
-			int[][] tempShit = new int[8][8];
-
-			for (int i = 0; i < state.board.length; i++) {
-				
-                for (int j = 0; j < state.board[i].length; j++) {
-
-					tempShit[i][j] = state.board[i][j];
-				}
-			}
-
-			//System.out.println("the parent board's turn is "+this.state.turn);
-
-            //System.out.println("current player: " +this.state.turn);
-
-            //System.out.println("the current board's turn is "+this.state.turn);
-			Board tempBoard = new Board(tempShit, -(this.state.turn));
-			//System.out.println("the child board's turn is "+tempBoard.turn);
-
-			tempBoard.move(move[0], move[1]);
-			//System.out.println("move!");
-			tuple t = new tuple(tempBoard, move[0], move[1]);
-			//System.out.println("the original tuple turn is "+t.board.turn);
-			//state.print();
-			//do the all flip stuffs, and return the most up-to-date board
-
-			boardTuple.add(t);
-
-		}
-
-		return boardTuple;
-	}
+//	public ArrayList<tuple> getChildBoards() {
+//
+//		//the tuple contains the new board
+//		//and the move, which directs to the new board
+//		ArrayList<tuple> boardTuple = new ArrayList<tuple>();
+//        
+//        int breakcount=0;
+//
+//        for (int[] move : this.state.getLegalMoves()) {
+//            
+//            breakcount++;
+//            
+//            if(breakcount>=8){
+//                
+//                break;
+//            }
+//            
+//			int[][] tempShit = new int[8][8];
+//
+//			for (int i = 0; i < state.board.length; i++) {
+//				
+//                for (int j = 0; j < state.board[i].length; j++) {
+//
+//					tempShit[i][j] = state.board[i][j];
+//				}
+//			}
+//
+//			//System.out.println("the parent board's turn is "+this.state.turn);
+//
+//            //System.out.println("current player: " +this.state.turn);
+//
+//            //System.out.println("the current board's turn is "+this.state.turn);
+//			Board tempBoard = new Board(tempShit, -(this.state.turn));
+//			//System.out.println("the child board's turn is "+tempBoard.turn);
+//
+//			tempBoard.move(move[0], move[1]);
+//			//System.out.println("move!");
+//			tuple t = new tuple(tempBoard, move[0], move[1]);
+//			//System.out.println("the original tuple turn is "+t.board.turn);
+//			//state.print();
+//			//do the all flip stuffs, and return the most up-to-date board
+//
+//			boardTuple.add(t);
+//
+//		}
+//
+//		return boardTuple;
+//	}
 
 	public boolean hasLegalMove() {
 

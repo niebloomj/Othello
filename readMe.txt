@@ -8,7 +8,7 @@ Yuntao  Zhou  		course#:113			Major: CS & Math
 Jacob   Niebloom	course#:			Major: CS & Business
 
 Abstract:
-In this project, we have built an AI System to play Othello with others. The AI takes a current board layout as input and predicts the next certain number of steps ahead to build up a tree structure for later usage;and finally, the AI returns the best move we should take as our next move by using Alpha-Beta pruning algorithm. Noteworthily, the Alpha-Beta pruning process consists of a heuristic function, which decides the score for each node in the tree.
+In this project, we have built an AI System to play Othello with others. The AI takes a current board layout as input and predicts the next certain number of steps ahead to build up a tree structure for the later usage;and finally, the AI returns the best move we should take as our next move by using Alpha-Beta pruning algorithm. Noteworthily, the Alpha-Beta pruning process consists of a heuristic function, which decides the score for each node in the tree.
 
 Files:
 1. Board.java 
@@ -19,10 +19,10 @@ Files:
 Board.java
 Board is the infrastructure of our system. The board records the current board layout by using int[][], the turn, and the move the player takes to reach the current board layout. 
 The move function takes the responsibility of checking canFlip, making doFile as well as update.
-Moreover, the getLegalMoves method returns an array list of moves (x,y)that we can take. 
+Moreover, the getLegalMoves method returns an array list of moves (x,y) that we can take. 
 
 Node.java
-Node is the fundamental element of the tree structure. Each node contains a board, a layer number, a score, a parent and a child list. The primary functions inside this file is adding child and getting score. The get score function is actually our heuristic function.
+Node is the fundamental element of the tree structure. Each node contains a board, a layer number, a score, a parent and a child list. The primary functions inside this file is adding child and getting score. The get score function is actually where we put our heuristic function in.
 
 Tuple.java
 This class is here for passing data from node class to main class. The data it passes are board and move. 
@@ -48,9 +48,38 @@ For one just the add 100*(maxscore - minscore)/(maxscore + minscore) to total he
 For the second I counted the legal moves of current board and add it to the H-score without multiplying it. It seems less important than other elements.
 For the last one, I put very high positive weight on the conners and positive weight on the edge moves. I put very high negative weight on the diagonal positions(x4) that is next to the conner and other positions(x8) on the edges while next to conners. Also I will check the positions for the other player, I want he to take these positions. His bad positions will count as part of nicescore of my AI. So all of these considerations will be given by the “nice score” and “bad score” which will also be added to the H-score.
 
+More about the Time, Depth and Child list size:
+
+Due to the reason that Java is not a memory flexible language, the deeper the tree the more the nodes we will have;thus, if we build this tree into certain substantial depth, the memory issue appears. So we have built up a bi-directional cut-off system to prevent the memory problem to happen. The first cut-off mechanism monitors the number of the children a node has, if this node’s child list size exceeds 10, then the system will automatically and randomly cut it to 8 since the child number growth rate is exponential. Furthermore. the second cut-off system controls the depth by a given time limit. The specific time, depth and child number relations are listed below:
+/*    time     |   depthLimit
+   -------------------------------
+             1s|   3
+             4s|  if childList num<7, depth=5, else depth=4
+            16s|  if childList num<6, depth=6, if childList num=7or6 depth=5, if childList num=8 depth=4
+            60s|  if childList num<6, depth=6, if childList num=7or6 depth=5, if childList num=8 depth=4
+           240s|  if childList num<6, depth=6, if childList num=7or6 depth=5, if childList num=8 depth=4
+    */
+
+However, even though the bi-directional cut-off system makes the AI’s action more flexible and so as to enhance its smartness, the memory constrain is still the fetter for us to build the tree deeper and see more forward. As for the time limit 240s, the AI actually definitely would not spend that much time to return our move.
 
 
+Credits List:
 
+Yuntao Zhou:
+Alpha-Beta Pruning 
+Heuristic Score Function
+Debug
+
+Xuefeng Peng:
+Tree structure 
+Node structure 
+Given Play Platform Connection System
+Time, depth limit system and pass functionality 
+Debug
+
+Jacob Niebloom:
+Board system
+Debug
 
 
 

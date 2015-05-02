@@ -44,17 +44,12 @@ public class Board {
 
 	public void move(int x, int y) {
 		
-        // board[x][y] = turn;
 		Update(x, y);
 		
-//        //player 1
-//		if (turn == 1)
-//			turn = -1;
-//		
-//        // player - 1
-//		else if (turn == -1)
-//			turn = 1;
-		
+        //the turn changing has been moved into the node calss
+        //so as to make the transition more smooth and
+        //logistically consistent
+        
         prevMove = new int[] {x, y};
 	
     }

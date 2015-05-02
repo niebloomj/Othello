@@ -5,17 +5,17 @@ public class main {
 
 
 	public static final int DEFAULT_DEPTH = 4; //this is the default depth the tree will construct.
-	public static int currentDepth = 0;
+	public static int currentDepth = 0; //records the current depth.
+    public static int DEFAULT_CHILDNUM=8;
 
 	public static void main(String[] args) {
 
 		
         Scanner scan = new Scanner(System.in);
 
-		Board board = new Board(); //the initial board
-        
         String[] command=scan.nextLine().split(" ");
         
+        //new game starts
         playGame(command,scan);
         
 
@@ -93,18 +93,49 @@ public class main {
 
 		if ((root.hasLegalMove()) && (root.layer <= depthLimit + currentDepth)) {
 
-
-			ArrayList<tuple> childrenBoard = root.getChildBoards();
+            //copy board layout
+            int[][] tempShit = new int[8][8];
             
-            for (tuple t : childrenBoard) {
+            for (int i = 0; i < state.board.length; i++) {
+                
+                for (int j = 0; j < state.board[i].length; j++) {
+                    
+                    tempShit[i][j] = state.board[i][j];
+                }
+            }
 
-                node child = new node(t.board); //add new board
-				child.state.prevMove[0] = t.x;
-				child.state.prevMove[1] = t.y;
-				child.layer = root.layer + 1;
-				root.addChild(child);
-				build(child, depthLimit);
-			}
+            int breakcount=0;
+            
+            for(int[][] move: root.getLegalMoves()){
+               
+                breakcount++;
+                //if this node has too many children
+                //use a condom next time.LOL
+                if(breakcount>DEFAULT_CHILDNUM)
+                    break;
+                
+                Board temp=new Board(tempShit,-(root.turn))
+                tempBoard.move(move[0],move[1]);
+                node child = new node(temp);
+                child.state.prevMove[0] =move[0];
+                child.state.prevMove[1] =move[1];
+                child.layer = root.layer + 1;
+                root.addChild(child);
+                build(child, depthLimit);
+                
+            }
+            
+			//ArrayList<tuple> childrenBoard = root.getChildBoards();
+            
+//            for (tuple t : childrenBoard) {
+//
+//                node child = new node(t.board); //add new board
+//				child.state.prevMove[0] = t.x;
+//				child.state.prevMove[1] = t.y;
+//				child.layer = root.layer + 1;
+//				root.addChild(child);
+//				build(child, depthLimit);
+//			}
 
 		}
 
@@ -206,7 +237,7 @@ public class main {
 
 	}
     /*
-     *
+     * determine the depth of the tree we built by a given time limit.
      */
     public static int determineDepthByTime(node root,double timeLimit1){
         
@@ -226,9 +257,9 @@ public class main {
             
         }else if(timeLimit1==16){
             
-            if(childnum<=6)
+            if(childnum<6)
                 depthLimit=6;
-            else if(childnum>=7&&childnum<11)
+            else if(childnum>=6&&childnum<=7)
                 depthLimit=5;
             else
                 depthLimit=4;
@@ -237,7 +268,7 @@ public class main {
             
             if(childnum<=6)
                 depthLimit=6;
-            else if(childnum>=7&&childnum<13)
+            else if(childnum>=6&&childnum<7)
                 depthLimit=5;
             else
                 depthLimit=4;
@@ -247,7 +278,7 @@ public class main {
             
             if(childnum<=6)
                 depthLimit=6;
-            else if(childnum>=7&&childnum<10)
+            else if(childnum>=6&&childnum<=7)
                 depthLimit=5;
             else
                 depthLimit=4;
