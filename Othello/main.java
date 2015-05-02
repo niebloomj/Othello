@@ -53,7 +53,7 @@ public class main {
             back=root.childList.get(0);
         
         }else{
-            
+            System.out.println("root.alpha: " + root.alpha + "root.beta: " + root.beta);
         AlphaBeta(root, root.alpha, root.beta);
         
 		for (node child : root.childList) {
@@ -113,7 +113,7 @@ public class main {
 	/*
 	 * The alpha and beta pruning mechanism
 	 */
-	public static int AlphaBeta(node n, int alpha, int beta) {
+	public static int AlphaBeta(node n, int a , int b) {
 		//System.out.println(n.score);
             
         
@@ -130,14 +130,14 @@ public class main {
 			
             for (int i = 0; i < childnum ; i++) { // for each possible move
 
-				int value = AlphaBeta(n.childList.get(i), n.alpha, n.beta);
+				int value = AlphaBeta(n.childList.get(i),n.alpha,n.beta);
 
 				if (value > n.alpha) {
 					n.alpha = value;
 				}
-                if (n.beta <= n.alpha){ // pruning
+                if (n.beta <= a){ // pruning
 					
-                    //System.out.println("in");
+                    System.out.println("alpha pruning in");
                     
                     //return n.beta;
 				    break;
@@ -151,12 +151,12 @@ public class main {
 
 			for (int i = 0; i < childnum ; i++) {
 
-				int value = AlphaBeta(n.childList.get(i), n.alpha, n.beta);
+				int value = AlphaBeta(n.childList.get(i),n.alpha,n.beta);
 				if (value < n.beta)
 					n.beta = value;
 
-                if (n.beta <= n.alpha){ // pruning
-					//System.out.println("also in");
+                if (n.beta <= a){ // pruning
+					System.out.println("beta pruning in");
                     //return n.alpha;
 				    break;
             }
