@@ -96,17 +96,17 @@ public class main {
             //copy board layout
             int[][] tempShit = new int[8][8];
             
-            for (int i = 0; i < state.board.length; i++) {
+            for (int i = 0; i < root.state.board.length; i++) {
                 
-                for (int j = 0; j < state.board[i].length; j++) {
+                for (int j = 0; j < root.state.board[i].length; j++) {
                     
-                    tempShit[i][j] = state.board[i][j];
+                    tempShit[i][j] = root.state.board[i][j];
                 }
             }
 
             int breakcount=0;
             
-            for(int[][] move: root.state.getLegalMoves()){
+            for(int[] move: root.state.getLegalMoves()){
                
                 breakcount++;
                 //if this node has too many children
@@ -114,8 +114,8 @@ public class main {
                 if(breakcount>DEFAULT_CHILDNUM)
                     break;
                 
-                Board temp=new Board(tempShit,-(root.turn))
-                tempBoard.move(move[0],move[1]);
+                Board temp=new Board(tempShit,-(root.state.turn));
+                temp.move(move[0],move[1]);
                 node child = new node(temp);
                 child.state.prevMove[0] =move[0];
                 child.state.prevMove[1] =move[1];
