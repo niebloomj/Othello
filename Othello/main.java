@@ -18,32 +18,6 @@ public class main {
         
         playGame(command,scan);
         
-//        int[][] test=new int[8][8];
-//        
-//        for(int i=0;i<8;i++){
-//            for(int j=0;j<8;j++)
-//                test[i][j]=0;
-//        }
-//        
-//        test[2][1]=1;test[2][4]=1;test[3][1]=1;
-//        test[3][5]=1;test[4][2]=1;test[5][2]=1;
-//        test[5][3]=1;test[5][4]=1;test[5][5]=1;
-//        test[6][2]=1;test[6][4]=1;test[6][6]=1;
-//        
-//        for(int i=0;i<8;i++){
-//            for(int j=0;j<8;j++)
-//                if(test[i][j]==0)
-//                test[i][j]=-1;
-//        }
-//        
-//        test[1][7]=0;
-//        
-//        Board b=new Board(test,1);
-//        int[] move=getDecision(b,DEFAULT_DEPTH,0,0);
-//        
-//        System.out.println(move[0]+" "+move[1]);
-//
-//        System.out.println("size is: "+new Board(test,1).getLegalMoves().size());
 
 	}
     
@@ -150,7 +124,7 @@ public class main {
             
         
 		if (n.childList.size() == 0) {
-			 System.out.println(n.score);
+			 //System.out.println(n.score);
 			return n.score;
 		}
 		
@@ -169,7 +143,7 @@ public class main {
 				}
                 if (n.beta <= n.alpha){ // pruning
 					
-                    System.out.println("in");
+                    //System.out.println("in");
                     
                     return n.beta;
 				//break;
@@ -188,7 +162,7 @@ public class main {
 					n.beta = value;
 
                 if (n.beta <= n.alpha){ // pruning
-					System.out.println("also in");
+					//System.out.println("also in");
                     return n.alpha;
 				//break;
             }
@@ -304,8 +278,17 @@ public class main {
                 
                 //System.out.println("opposite player gives "+OppDecision[0] + " " + OppDecision[1] + "\n");
                 board.turn=-1;
-				board.move(Integer.parseInt(move[0]), Integer.parseInt(move[1]));
-               //board.move(OppDecision[0],OppDecision[1]);
+                if(move[0].equals("pass")){
+                    
+                    //board remains unchanged
+                    
+                }else{
+                    
+                    board.move(Integer.parseInt(move[0]), Integer.parseInt(move[1]));
+                    
+                }
+
+                //board.move(OppDecision[0],OppDecision[1]);
                 board.print();
 
 
@@ -326,7 +309,17 @@ public class main {
 				String[] move = input.split(" ");
 
                 board.turn = -1;
+                //opposite player enters pass
+               
+                if(move[0].equals("pass")){
+                   
+                   //board remains unchanged
+                
+                }else{
+                    
 				board.move(Integer.parseInt(move[0]), Integer.parseInt(move[1]));
+                    
+                }
 
 				//make decision according to the move that
 				//opposite player have made
