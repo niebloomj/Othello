@@ -327,7 +327,7 @@ public class main {
                         //the output for informing the opposite player
                         //our move
                         System.out.println(decision[0]+" "+decision[1] + "\n");
-                        board.print();
+                        //board.print();
                     }
                     
                     
@@ -358,7 +358,7 @@ public class main {
                 }
 
                 //board.move(OppDecision[0],OppDecision[1]);
-                board.print();
+               // board.print();
 
 
 			}
